@@ -2258,8 +2258,8 @@ body>.toast{font-family:'Oswald','Arial Narrow',sans-serif!important}
 
 /* Matching horizontal slide motion for all public homepage image carousels. */
 .hero-card{overflow:hidden!important;isolation:isolate!important}
-.hero-card>img,.home-feature-carousel-frame>.home-image{transition:transform .5s cubic-bezier(.22,.72,.28,1)!important;will-change:transform}
-.carousel-slide-out{position:absolute!important;z-index:0!important;transition:transform .5s cubic-bezier(.22,.72,.28,1)!important;will-change:transform}
+.hero-card>img,.home-feature-carousel-frame>.home-image{transition:transform .5s cubic-bezier(.22,.72,.28,1)!important;will-change:transform;backface-visibility:hidden;}
+.carousel-slide-out{z-index:0!important;transition:transform .5s cubic-bezier(.22,.72,.28,1)!important;will-change:transform}
 .carousel-slide-overlay{position:absolute!important;z-index:1!important;max-width:none!important;margin:0!important;transform:translateX(105%);transition:transform .5s cubic-bezier(.22,.72,.28,1)!important;pointer-events:none!important;will-change:transform}
 .hero-card .carousel-slide-overlay{border-radius:16px!important}
 .home-feature-carousel-frame .carousel-slide-overlay{border-radius:19px!important}

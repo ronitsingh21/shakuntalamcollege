@@ -797,19 +797,36 @@
   },true);
 
   /* Manual hero carousel controls — four-to-three portrait-safe frame. */
-  window.animatePublicCarousel=function(frame,image,src,alt,direction=1,onDone){
-    if(!frame||!image||frame.dataset.carouselAnimating==='true')return;
+  window.animatePublicCarousel=async function(frame,image,src,alt,direction=1,onDone){
+    if(!frame||!image||!src||frame.dataset.carouselAnimating==='true')return;
     frame.dataset.carouselAnimating='true';
-    const frameBox=frame.getBoundingClientRect(),imageBox=image.getBoundingClientRect(),incoming=document.createElement('img');
-    incoming.className='carousel-slide-overlay';incoming.alt=alt||'';incoming.draggable=false;
-    incoming.style.top=`${imageBox.top-frameBox.top}px`;incoming.style.left=`${imageBox.left-frameBox.left}px`;incoming.style.width=`${imageBox.width}px`;incoming.style.height=`${imageBox.height}px`;
-    const computed=getComputedStyle(image);incoming.style.objectFit=computed.objectFit;incoming.style.objectPosition=computed.objectPosition;incoming.style.borderRadius=computed.borderRadius;incoming.style.transform=`translateX(${direction*105}%)`;incoming.src=src;
-    frame.appendChild(incoming);
-    let started=false;
-    const begin=()=>{if(started)return;started=true;image.classList.add('carousel-slide-out');image.style.transform=`translateX(${-direction*105}%)`;incoming.style.transform='translateX(0)'};
-    incoming.addEventListener('load',begin,{once:true});incoming.addEventListener('error',begin,{once:true});
-    requestAnimationFrame(()=>requestAnimationFrame(begin));
-    setTimeout(()=>{image.src=src;image.alt=alt||'';image.style.transform='';image.classList.remove('carousel-slide-out');incoming.remove();frame.dataset.carouselAnimating='false';if(onDone)onDone()},560);
+    let incoming=null;
+    try{
+      /* Decode before starting so the outgoing image remains visible until
+         the next image is fully ready, even on a slow mobile connection. */
+      incoming=new Image();incoming.alt=alt||'';incoming.draggable=false;incoming.decoding='async';incoming.src=src;
+      if(incoming.decode)await incoming.decode();
+      else await new Promise((resolve,reject)=>{incoming.onload=resolve;incoming.onerror=reject});
+      const frameBox=frame.getBoundingClientRect(),imageBox=image.getBoundingClientRect();
+      incoming.className='carousel-slide-overlay';
+      incoming.style.top=`${imageBox.top-frameBox.top}px`;incoming.style.left=`${imageBox.left-frameBox.left}px`;
+      incoming.style.width=`${imageBox.width}px`;incoming.style.height=`${imageBox.height}px`;
+      const computed=getComputedStyle(image);incoming.style.objectFit=computed.objectFit;incoming.style.objectPosition=computed.objectPosition;incoming.style.borderRadius=computed.borderRadius;
+      incoming.style.transform=`translateX(${direction*105}%)`;frame.appendChild(incoming);
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      image.classList.add('carousel-slide-out');image.style.transform=`translateX(${-direction*105}%)`;incoming.style.transform='translateX(0)';
+      await new Promise(resolve=>setTimeout(resolve,560));
+      /* Promote the already decoded, visible slide into the original image
+         element's place. Avoid changing src on a live image, which can flash
+         while the browser fetches or decodes it again. */
+      const id=image.id,classes=image.className.split(/\s+/).filter(name=>name&&name!=='carousel-slide-out').join(' ');
+      incoming.id=id;incoming.className=classes;
+      ['top','left','width','height','transform','objectFit','objectPosition','borderRadius','transition','zIndex','position'].forEach(key=>incoming.style[key]='');
+      image.replaceWith(incoming);incoming=null;
+      if(onDone)onDone();
+    }catch(error){
+      if(incoming&&incoming.parentNode)incoming.remove();
+    }finally{frame.dataset.carouselAnimating='false'}
   };
   window.nextHeroSlideV7=function(direction){
     const slides=(db()?.site?.heroSlides||[]).filter(x=>x&&x.image),imgEl=document.getElementById('heroCarouselImage')||document.querySelector('.hero-card img');
