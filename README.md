@@ -23,5 +23,3 @@ This package contains the repaired demo website and portals.
 
 ## Run
 Open `index.html` in a modern browser. The demo stores its temporary database in browser storage.
-
-Version 44 resets the login dialog to the Student role and clears old credentials each time it opens, preventing a previously selected admin or teacher role from being reused unintentionally. Successful login sessions now explicitly store the selected role.
