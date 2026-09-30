@@ -2310,3 +2310,50 @@ select:not([multiple]){-webkit-appearance:none!important;appearance:none!importa
 .final-nav .nav-menu-row>.final-links>.nav-drop>a{display:inline-flex!important;flex:0 0 auto!important;width:max-content!important;max-width:none!important;justify-content:flex-start!important;gap:0!important;white-space:nowrap!important}
 .final-nav .nav-menu-row>.final-links>.nav-drop>a>b{display:none!important}
 .final-nav .nav-menu-row>.final-links>.nav-drop>a::after{flex:0 0 11px!important;margin-left:6px!important}
+
+.events-empty-note{grid-column:1/-1;margin:0!important;padding:2px 0!important;text-align:center;font-size:15px!important;line-height:1.5!important;color:#806f75!important}
+
+/* Course detail pages: animated overview and readable programme snapshot. */
+.course-showcase-section{overflow:hidden}
+.course-showcase-grid{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);gap:24px;align-items:stretch}
+.course-overview-card,.course-snapshot-card{min-width:0;padding:24px!important;border:1px solid #f0dce2!important;border-radius:24px!important;background:linear-gradient(155deg,#fff 0%,#fffafb 100%)!important;box-shadow:0 18px 48px rgba(78,18,37,.07)!important;animation:courseCardRise .62s cubic-bezier(.2,.75,.25,1) both}
+.course-snapshot-card{animation-delay:.12s}
+.course-overview-card:hover,.course-snapshot-card:hover{transform:translateY(-5px);box-shadow:0 24px 56px rgba(78,18,37,.12)!important;transition:transform .25s ease,box-shadow .25s ease}
+.course-overview-image{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:18px;background:#f4e9ec}
+.course-overview-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.75,.25,1)}
+.course-overview-card:hover .course-overview-image img{transform:scale(1.045)}
+.course-overview-content{padding:20px 3px 2px}
+.course-overview-content h2,.course-snapshot-heading h2{margin:7px 0 10px;color:#351b24;font:400 clamp(27px,3vw,40px)/1.08 'Anton',sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.course-overview-content .course-lead{margin:0 0 9px;color:#4c2a35;font:500 18px/1.55 'Oswald',sans-serif}
+.course-overview-content>.muted{margin:0 0 16px;font:400 15px/1.65 'Oswald',sans-serif}
+.course-highlight-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0}
+.course-highlight-row span{display:flex;align-items:center;min-height:54px;padding:10px;border:1px solid #f2dce2;border-radius:12px;background:#fff5f7;color:#8e1834;font:600 12px/1.4 'Oswald',sans-serif;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.course-highlight-row span:hover{transform:translateY(-3px);border-color:#e998aa;background:#fff}
+.course-overview-content .btn{margin-top:3px}
+.course-snapshot-card{padding:28px!important}
+.course-snapshot-heading{padding-bottom:11px;border-bottom:1px solid #f1dfe4}
+.course-snapshot-heading h2{font-size:clamp(27px,2.6vw,36px)}
+.course-snapshot-heading p{margin:0 0 4px;font:400 14px/1.5 'Oswald',sans-serif}
+.course-snapshot-list{display:grid}
+.course-snapshot-row{display:grid;grid-template-columns:minmax(105px,.72fr) minmax(0,1.28fr);gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid #f1dfe4;animation:courseRowIn .42s ease both;animation-delay:calc(var(--course-row-index,0)*55ms)}
+.course-snapshot-row>span{color:#89777d;font:500 13px/1.4 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.045em}
+.course-snapshot-row>b{text-align:right;color:#38212a;font:600 16px/1.45 'Oswald',sans-serif;text-transform:capitalize}
+.course-snapshot-row:nth-child(3)>b{color:#a7193b;letter-spacing:.025em}
+.course-snapshot-note{display:flex;align-items:flex-start;gap:12px;margin-top:19px;padding:15px;border:1px solid #f2d9df;border-radius:15px;background:linear-gradient(110deg,#fff4f6,#fffaf0)}
+.course-note-icon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:10px;background:#ffe2e9;color:#e51843;font-size:17px}
+.course-snapshot-note p{margin:2px 0 0;color:#715d65;font:400 14px/1.55 'Oswald',sans-serif}
+.course-snapshot-note b{color:#411e2c;font-weight:600}
+@keyframes courseCardRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes courseRowIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:900px){.course-showcase-grid{grid-template-columns:1fr}.course-overview-card,.course-snapshot-card{padding:20px!important}.course-overview-image{aspect-ratio:4/3}.course-snapshot-card{animation-delay:.06s}}
+@media(max-width:520px){.course-showcase-grid{gap:16px}.course-overview-card,.course-snapshot-card{padding:14px!important;border-radius:18px!important}.course-overview-image{border-radius:13px}.course-overview-content{padding-top:15px}.course-overview-content h2{font-size:30px}.course-overview-content .course-lead{font-size:16px}.course-highlight-row{grid-template-columns:1fr;gap:7px}.course-highlight-row span{min-height:0;padding:9px 11px}.course-snapshot-row{grid-template-columns:minmax(88px,.65fr) minmax(0,1.35fr);gap:10px;padding:13px 0}.course-snapshot-row>b{font-size:14px}.course-snapshot-note{padding:12px}}
+@media(prefers-reduced-motion:reduce){.course-overview-card,.course-snapshot-card,.course-snapshot-row{animation:none!important}.course-overview-card:hover,.course-snapshot-card:hover,.course-overview-card:hover .course-overview-image img,.course-highlight-row span{transition:none!important;transform:none!important}}
+
+/* Admin controls for the default photos used on all six course pages. */
+.course-photo-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.course-photo-admin-card{display:grid;grid-template-columns:minmax(150px,.9fr) minmax(0,1.1fr);gap:15px;align-items:center;padding:13px;border:1px solid #f0dce2;border-radius:16px;background:linear-gradient(145deg,#fff,#fff8fa)}
+.course-photo-admin-card>img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:11px;background:#f4e9ec}
+.course-photo-admin-card h4{margin:4px 0 10px;color:#351b24;font:600 17px/1.35 'Oswald',sans-serif}
+.course-photo-admin-card .home-carousel-upload{display:inline-flex;margin:0 0 8px}
+.course-photo-admin-card .btn{display:block;padding:6px 0;font-size:12px}
+@media(max-width:700px){.course-photo-admin-grid{grid-template-columns:1fr}.course-photo-admin-card{grid-template-columns:minmax(120px,.85fr) minmax(0,1.15fr)}}

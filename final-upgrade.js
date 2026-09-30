@@ -208,7 +208,7 @@
   /* ---------- campus gallery ---------- */
   function gallery(){
     const list=(db().gallery||[]).filter(g=>g.image).slice().sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
-    return page('Campus Gallery','Explore photographs from campus life, college events and student activities.',`<section class="section"><div class="container"><div class="gallery-intro card"><span class="kicker">Campus life</span><h2>Shakuntalam College Gallery</h2><p class="muted">A collection of moments from across our college community.</p></div><div class="gallery-photo-grid">${list.map(g=>`<figure class="gallery-admin-card"><img src="${g.image}" alt="${escapeHtml(g.title||'College photo')}" loading="lazy"><figcaption><b>${escapeHtml(g.title||'Campus photo')}</b><small>${escapeHtml(g.date||'')}</small></figcaption></figure>`).join('')||'<div class="card empty">No gallery photographs have been uploaded yet.</div>'}</div></div></section>`);
+    return page('Campus Gallery','Explore photographs from campus life, college events and student activities.',`<section class="section"><div class="container"><div class="gallery-photo-grid">${list.map(g=>`<figure class="gallery-admin-card"><img src="${g.image}" alt="${escapeHtml(g.title||'College photo')}" loading="lazy"><figcaption><b>${escapeHtml(g.title||'Campus photo')}</b><small>${escapeHtml(g.date||'')}</small></figcaption></figure>`).join('')||'<div class="card empty">No gallery photographs have been uploaded yet.</div>'}</div></div></section>`);
   }
 
   /* ---------- portal sidebar / top avatar ---------- */
