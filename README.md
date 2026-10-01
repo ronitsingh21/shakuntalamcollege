@@ -2,6 +2,10 @@
 
 This package contains the repaired demo website and portals.
 
+## IQAC
+- Added an IQAC page with institutional quality-assurance information.
+- Administrators can publish a PDF or multiple images from Admin Portal → Operations → IQAC; published files appear on the public IQAC page.
+
 ## Important fixes in this build
 - Fixed blank/white page caused by missing `noticeCard` and `subjectsForCourse` helpers.
 - Added safe migration for older browser data where website social-link data was incomplete.
