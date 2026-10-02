@@ -2896,3 +2896,151 @@ select:not([multiple]){-webkit-appearance:none!important;appearance:none!importa
 html.portal-login-standalone,html.portal-login-standalone body{min-height:100%;background:#fff!important}
 html.portal-login-standalone #loginModal.modal{background:#fff!important;backdrop-filter:none!important}
 html.portal-login-standalone #loginModal .modal-box{background:#fffdfd!important;border:1.5px solid #edcbd4!important;box-shadow:0 22px 70px rgba(117,24,49,.1)!important}
+
+
+/* Keep the student profile portrait frame square on every screen size. */
+.portal-main .profile-hero .student-profile-avatar{
+  box-sizing:border-box!important;
+  flex:0 0 clamp(96px,12vw,145px)!important;
+  width:clamp(96px,12vw,145px)!important;
+  height:auto!important;
+  aspect-ratio:1/1!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+}
+.portal-main .profile-hero .student-profile-avatar img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  aspect-ratio:1/1!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+@media(max-width:650px){
+  .portal-main .profile-hero .student-profile-avatar{flex-basis:96px!important;width:96px!important;border-radius:22px!important}
+}
+
+
+/* Force profile photo frames to equal width and height in every portal. */
+.portal-main .profile-hero .profile-avatar{
+  box-sizing:border-box!important;
+  flex:0 0 clamp(96px,12vw,145px)!important;
+  width:clamp(96px,12vw,145px)!important;
+  min-width:clamp(96px,12vw,145px)!important;
+  height:clamp(96px,12vw,145px)!important;
+  min-height:clamp(96px,12vw,145px)!important;
+  max-height:clamp(96px,12vw,145px)!important;
+  aspect-ratio:1/1!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+}
+.portal-main .profile-hero .profile-avatar img{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;
+}
+@media(max-width:650px){
+  .portal-main .profile-hero .profile-avatar{
+    flex-basis:96px!important;width:96px!important;min-width:96px!important;
+    height:96px!important;min-height:96px!important;max-height:96px!important;
+    border-radius:22px!important;
+  }
+}
+
+
+/* Polished responsive profile identity cards for student, teacher and admin portals. */
+.portal-main .profile-shell>.profile-hero{
+  display:grid!important;
+  grid-template-columns:100px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:clamp(18px,3vw,30px)!important;
+  min-height:0!important;
+  padding:clamp(20px,3vw,34px)!important;
+  overflow:hidden!important;
+  background:linear-gradient(115deg,#fff4f6 0%,#fffdfb 68%,#fff8ed 100%)!important;
+  border:1px solid #efd5dc!important;
+  box-shadow:0 16px 42px rgba(105,12,38,.075)!important;
+  animation:profile-card-enter .55s cubic-bezier(.2,.75,.25,1) both;
+}
+.portal-main .profile-shell>.profile-hero>.profile-avatar{
+  grid-column:1!important;grid-row:1!important;
+  flex:none!important;width:100px!important;min-width:100px!important;max-width:100px!important;
+  height:100px!important;min-height:100px!important;max-height:100px!important;
+  margin:0!important;border:2px solid #f0d1da!important;border-radius:25px!important;
+  background:linear-gradient(145deg,#fff0f4,#fff9fa)!important;
+  color:#c91c42!important;font-size:34px!important;
+  box-shadow:0 8px 20px rgba(164,20,47,.08)!important;
+  animation:profile-avatar-enter .65s .08s cubic-bezier(.2,.75,.25,1) both;
+}
+.portal-main .profile-shell>.profile-hero>.profile-avatar img{
+  display:block!important;width:100%!important;height:100%!important;
+  border-radius:inherit!important;object-fit:cover!important;object-position:center!important;
+}
+.portal-main .profile-shell>.profile-hero>div:last-child{
+  grid-column:2!important;grid-row:1!important;min-width:0!important;
+  animation:profile-copy-enter .5s .12s ease-out both;
+}
+.portal-main .profile-shell>.profile-hero .kicker{
+  display:block!important;margin:0 0 7px!important;font-size:clamp(12px,1.3vw,15px)!important;
+  letter-spacing:.16em!important;line-height:1.35!important;
+}
+.portal-main .profile-shell>.profile-hero h2{
+  max-width:100%!important;margin:0 0 8px!important;
+  color:#321b23!important;font-size:clamp(28px,3.5vw,44px)!important;
+  line-height:1.08!important;overflow-wrap:anywhere!important;
+}
+.portal-main .profile-shell>.profile-hero p{
+  max-width:62ch!important;margin:0!important;color:#715e66!important;
+  font:500 clamp(14px,1.7vw,20px)/1.45 'Oswald',sans-serif!important;
+  overflow-wrap:anywhere!important;
+}
+@keyframes profile-card-enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes profile-avatar-enter{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes profile-copy-enter{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:650px){
+  .portal-main .profile-shell>.profile-hero{grid-template-columns:82px minmax(0,1fr)!important;gap:15px!important;padding:18px!important;border-radius:20px!important}
+  .portal-main .profile-shell>.profile-hero>.profile-avatar{width:82px!important;min-width:82px!important;max-width:82px!important;height:82px!important;min-height:82px!important;max-height:82px!important;border-radius:21px!important}
+  .portal-main .profile-shell>.profile-hero h2{font-size:clamp(25px,7vw,34px)!important}
+  .portal-main .profile-shell>.profile-hero p{font-size:15px!important}
+}
+@media(max-width:360px){
+  .portal-main .profile-shell>.profile-hero{grid-template-columns:70px minmax(0,1fr)!important;gap:12px!important;padding:15px!important}
+  .portal-main .profile-shell>.profile-hero>.profile-avatar{width:70px!important;min-width:70px!important;max-width:70px!important;height:70px!important;min-height:70px!important;max-height:70px!important;border-radius:18px!important}
+  .portal-main .profile-shell>.profile-hero h2{font-size:24px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .portal-main .profile-shell>.profile-hero,.portal-main .profile-shell>.profile-hero>.profile-avatar,.portal-main .profile-shell>.profile-hero>div:last-child{animation:none!important}
+}
+
+
+/* Use the new single college logo with a live wordmark in portal navigation. */
+.side.final-side.blink-side .portal-brand{
+  justify-content:flex-start!important;gap:10px!important;padding:4px 4px 13px!important;
+}
+.side.final-side.blink-side .portal-brand-lockup{
+  display:block!important;flex:0 0 58px!important;width:58px!important;max-width:58px!important;
+  height:58px!important;max-height:58px!important;margin:0!important;border-radius:50%!important;
+  object-fit:contain!important;object-position:center!important;background:#fff!important;
+}
+.side.final-side.blink-side .portal-brand .brand-copy{
+  display:flex!important;flex:1 1 auto!important;flex-direction:column!important;
+  min-width:0!important;overflow:visible!important;line-height:1!important;
+}
+.side.final-side.blink-side .portal-brand .brand-copy strong{
+  color:#3c1a27!important;font:400 16px/1.05 'Anton',sans-serif!important;white-space:normal!important;
+}
+.side.final-side.blink-side .portal-brand .brand-copy small{
+  margin-top:4px!important;color:#795c67!important;font:600 7px/1.2 'Oswald',sans-serif!important;
+  letter-spacing:.06em!important;white-space:normal!important;
+}
+.side.final-side.blink-side .portal-brand .brand-copy em{
+  margin-top:3px!important;color:#a4142f!important;font:700 8px/1.1 'Oswald',sans-serif!important;
+}
+@media(max-width:650px){.side.final-side.blink-side .portal-brand-lockup{flex-basis:50px!important;width:50px!important;max-width:50px!important;height:50px!important;max-height:50px!important}}
+
+
+/* The full crest includes wide ribbon edges, so do not crop it into a circle. */
+.side.final-side.blink-side .portal-brand-lockup{
+  border-radius:0!important;clip-path:none!important;
+  object-fit:contain!important;object-position:center!important;
+  background:transparent!important;overflow:visible!important;
+}
