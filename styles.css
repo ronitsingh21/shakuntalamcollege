@@ -334,6 +334,59 @@ html,body{overflow-x:hidden}
   .footer{padding-top:28px!important}
   .footer .copy{display:grid!important;gap:5px!important}
 }
+
+/* A calmer, shared attendance-card system for student and teacher portals. */
+.student-attendance-page,.attendance-page{gap:18px!important}
+.student-attendance-hero,.attendance-banner{box-sizing:border-box!important;min-width:0!important;padding:clamp(22px,3vw,32px)!important;border:1px solid #efd9df!important;border-radius:22px!important;background:linear-gradient(125deg,#fff 0%,#fff8f9 72%,#fffaf0 100%)!important;box-shadow:0 10px 28px rgba(78,18,37,.045)!important}
+.student-attendance-hero>div:first-child,.attendance-banner>div:first-child{min-width:0!important}
+.student-attendance-hero h2,.attendance-banner h2{letter-spacing:.005em!important}
+.student-attendance-stats,.attendance-overview-cards{align-items:stretch!important;gap:12px!important}
+.student-attendance-stats .attendance-stat,.attendance-overview-cards .attendance-stat{position:relative!important;align-content:center!important;gap:6px!important;min-height:112px!important;padding:17px 18px!important;border:1px solid #efdee2!important;border-radius:17px!important;background:#fff!important;box-shadow:0 6px 18px rgba(76,20,36,.035)!important}
+.student-attendance-stats .attendance-stat:before,.attendance-overview-cards .attendance-stat:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;border-radius:17px 0 0 17px;background:#b3123d}
+.student-attendance-stats .attendance-stat small,.attendance-overview-cards .attendance-stat small{font-size:10px!important;letter-spacing:.1em!important}
+.student-attendance-stats .attendance-stat b,.attendance-overview-cards .attendance-stat b{font-size:27px!important}
+.attendance-stat-link:hover,.attendance-stat-link:focus-visible{transform:translateY(-2px)!important;border-color:#dbaab7!important;box-shadow:0 12px 24px rgba(91,14,36,.08)!important}
+.attendance-alert-card{box-sizing:border-box!important;min-width:0!important;padding:17px 19px!important;border:1px solid #efdde2!important;border-radius:17px!important;background:#fff!important;box-shadow:0 6px 18px rgba(76,20,36,.035)!important}
+.attendance-alert-card.has-alert{border-color:#edc7d0!important;background:#fff8f9!important}
+.attendance-alert-icon{border-radius:12px!important;background:#eff8f2!important;color:#237448!important}
+.attendance-alert-card.has-alert .attendance-alert-icon{background:#ffedf1!important;color:#a4142f!important}
+.attendance-section-title{align-items:center!important;margin:4px 0 0!important}
+.attendance-section-title h2{font-size:24px!important}
+.attendance-course-card{display:grid!important;grid-template-columns:44px minmax(0,1fr) auto!important;grid-template-areas:"icon kicker kicker" "title title count" "note note note"!important;align-items:center!important;column-gap:12px!important;row-gap:8px!important;min-width:0!important;min-height:170px!important;padding:22px!important;border:1px solid #efdee2!important;border-radius:19px!important;background:linear-gradient(150deg,#fff 0%,#fffafb 100%)!important;box-shadow:0 7px 20px rgba(76,20,36,.04)!important;text-decoration:none!important}
+.attendance-course-card .hier-icon{grid-area:icon!important;display:grid!important;place-items:center!important;width:44px!important;height:44px!important;border-radius:13px!important;background:#fff0f3!important;color:#a4142f!important;font-size:21px!important}
+.attendance-course-card>.kicker{grid-area:kicker!important;margin:0!important;font-size:10px!important}
+.attendance-course-card h3{grid-area:title!important;min-width:0!important;margin:3px 0 0!important;color:#351522!important;font:24px 'Anton',sans-serif!important}
+.attendance-course-card>strong{grid-area:count!important;display:grid!important;place-items:center!important;min-width:42px!important;height:42px!important;padding:0 10px!important;border-radius:13px!important;background:#fff0f3!important;color:#a4142f!important;font:22px 'Anton',sans-serif!important}
+.attendance-course-card>small{grid-area:note!important;margin-top:4px!important;padding-top:12px!important;border-top:1px solid #f1e5e8!important;color:#806b74!important;font:12px 'Oswald',sans-serif!important}
+.attendance-semester-card{min-width:0!important;padding:22px!important;border:1px solid #efdee2!important;border-radius:18px!important;background:#fff!important;box-shadow:0 7px 20px rgba(76,20,36,.04)!important}
+.attendance-semester-card>span{display:inline-flex!important;padding:6px 9px!important;border-radius:999px!important;background:#fff0f3!important;color:#a4142f!important;font:700 10px 'Oswald',sans-serif!important;letter-spacing:.1em!important}
+.attendance-semester-card>b{display:block!important;margin:12px 0 5px!important;color:#351522!important;font:31px 'Anton',sans-serif!important}
+.attendance-semester-card>small{color:#806b74!important;font:12px 'Oswald',sans-serif!important}
+.attendance-panel.daily-register-card{padding:22px!important;border:1px solid #efdee2!important;border-radius:20px!important;background:#fff!important;box-shadow:0 8px 24px rgba(76,20,36,.04)!important}
+.daily-register-card .attendance-panel-head{align-items:center!important}
+.daily-register-card .attendance-panel-head h3{font-size:22px!important}
+@media(max-width:650px){
+  .student-attendance-page,.attendance-page{gap:13px!important}
+  .student-attendance-hero,.attendance-banner{padding:17px!important;border-radius:17px!important}
+  .student-attendance-hero{gap:12px!important}
+  .student-attendance-hero h2,.attendance-banner h2{font-size:25px!important}
+  .student-attendance-hero p,.attendance-banner p{font-size:13px!important}
+  .student-attendance-score{width:72px!important;height:72px!important;flex-basis:72px!important;border-width:4px!important}
+  .student-attendance-score strong{font-size:21px!important}
+  .student-attendance-score span{font-size:9px!important}
+  .student-attendance-stats,.attendance-overview-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .student-attendance-stats .attendance-stat,.attendance-overview-cards .attendance-stat{min-height:98px!important;padding:13px!important}
+  .student-attendance-stats .attendance-stat b,.attendance-overview-cards .attendance-stat b{font-size:22px!important}
+  .student-attendance-stats .attendance-stat span,.attendance-overview-cards .attendance-stat span{font-size:11px!important;line-height:1.35!important}
+  .student-attendance-hero h2{max-width:250px!important}
+  .attendance-course-card{min-height:145px!important;padding:17px!important;grid-template-columns:38px minmax(0,1fr) auto!important;column-gap:9px!important}
+  .attendance-course-card .hier-icon{width:38px!important;height:38px!important}
+  .attendance-course-card h3{font-size:21px!important}
+  .attendance-course-card>small{font-size:11px!important}
+  .attendance-semester-card{padding:17px!important}
+  .attendance-panel.daily-register-card{padding:15px!important}
+  .daily-register-card .attendance-panel-head{gap:10px!important}
+}
 .final-side .side-icon svg{width:19px!important;height:19px!important;display:block!important}
 .final-side nav a.active .side-icon svg{stroke-width:2!important}
 
@@ -541,13 +594,13 @@ body{background:#fffaf9;color:var(--blink-ink)}
 }
 
 /* PORTAL LOGIN — clean, focused, Blinkit-style red treatment */
-.nav-actions .btn.btn-gold[onclick="openLogin()"]{
+.nav-actions .btn.btn-gold[onclick="openPortalLoginInNewTab()"]{
   background:var(--blink-yellow)!important;
   color:#4a2d00!important;
   border:1px solid rgba(74,45,0,.08)!important;
   box-shadow:0 7px 18px rgba(247,201,72,.24)!important;
 }
-.nav-actions .btn.btn-gold[onclick="openLogin()"]:hover{
+.nav-actions .btn.btn-gold[onclick="openPortalLoginInNewTab()"]:hover{
   transform:translateY(-1px)!important;
   filter:saturate(1.04)!important;
 }
@@ -642,7 +695,7 @@ body{background:var(--v4-cream)!important;color:var(--v4-ink)!important}
 .final-links>a:hover,.final-links .nav-drop>a:hover,.links>a:hover,.links .nav-drop>a:hover{color:var(--v4-red)!important}
 .nav-actions .btn.btn-gold,.nav-actions .btn.btn-primary{background:var(--v4-red)!important;color:#fff!important;border-color:var(--v4-red)!important;box-shadow:0 7px 18px rgba(212,20,61,.18)!important}
 .nav-actions .btn.btn-gold:first-child{background:var(--v4-gold)!important;color:#4a2d00!important;border-color:#edbf31!important}
-.nav-actions .btn.btn-gold[onclick="openLogin()"]{background:var(--v4-gold)!important;color:#4a2d00!important;border-color:#edbf31!important}
+.nav-actions .btn.btn-gold[onclick="openPortalLoginInNewTab()"]{background:var(--v4-gold)!important;color:#4a2d00!important;border-color:#edbf31!important}
 .final-links .drop-menu{top:calc(100% + 3px)!important;border:1px solid #eedbe0!important;background:#fff!important;box-shadow:0 18px 45px rgba(80,9,29,.12)!important;border-radius:12px!important}
 .final-links .nav-drop::after{height:8px!important}
 
@@ -931,7 +984,7 @@ h1,h2,h3,h4,h5,h6{line-height:1.08!important}
 .hero-brand .eyebrow{margin-left:0!important;text-align:left!important}
 
 /* 4. Portal Login is visually identical to Apply Now. */
-.nav-actions .btn.btn-gold[onclick="openLogin()"]{
+.nav-actions .btn.btn-gold[onclick="openPortalLoginInNewTab()"]{
   background:var(--v7-gold)!important;
   color:#4a2d00!important;
   border:1px solid #edbf31!important;
@@ -1143,6 +1196,34 @@ h1,h2,h3,h4,h5,h6{line-height:1.02!important;margin-bottom:.32em!important}
   .final-links{gap:20px!important}
   .topbar,.topbar span{font-size:14px!important}
 }
+
+/* Attendance dashboard refinement: balanced metrics and purposeful course cards. */
+.teacher-overview-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.teacher-attendance-home .attendance-banner{min-height:205px!important}
+.teacher-attendance-home .attendance-banner-mark{background:linear-gradient(145deg,#a4142f,#d11a46)!important;box-shadow:0 12px 26px rgba(164,20,47,.18)!important}
+.teacher-attendance-home .attendance-section-title{margin-top:10px!important}
+.teacher-attendance-home .course-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
+.teacher-attendance-home .attendance-course-card{min-height:166px!important;padding:23px!important;border-radius:20px!important;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease!important}
+.teacher-attendance-home .attendance-course-card .hier-icon svg{display:block;width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.teacher-attendance-home .attendance-course-card:hover{transform:translateY(-4px)!important;border-color:#dfacb9!important;box-shadow:0 18px 36px rgba(91,14,36,.1)!important}
+.student-attendance-page .attendance-stat-link{display:grid!important;align-content:center!important;text-decoration:none!important}
+.student-attendance-page .attendance-alert-card>div{min-width:0!important}
+@media(max-width:950px){.teacher-overview-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:650px){
+  .teacher-overview-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .teacher-overview-cards .attendance-stat:last-child{grid-column:1/-1!important;min-height:82px!important}
+  .teacher-attendance-home .attendance-banner{min-height:0!important}
+  .teacher-attendance-home .course-grid{grid-template-columns:1fr!important;gap:12px!important}
+  .teacher-attendance-home .attendance-course-card{min-height:138px!important;padding:17px!important}
+  .teacher-attendance-home .attendance-course-card .hier-icon{width:40px!important;height:40px!important}
+}
+
+/* Keep the mobile action pair inside the header's content edge. */
+@media(max-width:700px){
+  .final-nav .nav-brand-row{min-width:0!important;max-width:100%!important;overflow-x:clip!important}
+  .final-nav .nav-actions{box-sizing:border-box!important;display:flex!important;flex-flow:row nowrap!important;justify-content:flex-end!important;width:100%!important;max-width:100%!important;min-width:0!important;margin-right:0!important;gap:8px!important;padding-inline:0!important;overflow:visible!important}
+  .final-nav .nav-actions>.btn-gold{box-sizing:border-box!important;flex:1 1 0!important;width:0!important;min-width:0!important;max-width:calc((100% - 8px)/2)!important;padding-inline:6px!important;font-size:clamp(13px,3.8vw,16px)!important}
+}
 @media(max-width:800px){
   .final-links{gap:14px!important}
   .topbar,.topbar span{font-size:13px!important}
@@ -1200,7 +1281,7 @@ body,body *{font-family:'Oswald','Arial Narrow',sans-serif!important}
 .program-badge-ref{display:inline-flex;align-self:flex-start;background:#eaf6f1;color:#19724f;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;margin-bottom:17px}
 .program-badge-ref.upcoming{background:#fff4d8;color:#93680e}
 .program-card-ref h3{font-size:22px;margin:3px 0 12px}.program-card-ref p{font-size:15px;line-height:1.58}.program-card-ref small{font-size:13px;color:#766970;margin-top:auto;padding-top:5px}.program-card-ref>a{font-size:14px;margin-top:20px}
-.recognition-note{font-size:13px!important;text-align:center;color:#84767b;line-height:1.55;max-width:1050px;margin:24px auto 0}
+.recognition-note{font-size:13px!important;text-align:center;color:#84767b;line-height:1.55;max-width:1050px;margin:44px auto 0!important}
 @media(max-width:1000px){.campus-grid-ref{grid-template-columns:1fr 1fr}.program-grid-ref{grid-template-columns:1fr 1fr}.campus-card-ref{min-height:335px}}
 @media(max-width:650px){.admission-track span{font-size:12px;letter-spacing:.1em}.section.story-section{padding:54px 0}.story-section h2{font-size:39px}.story-section p{font-size:17px}.story-values{grid-template-columns:1fr;gap:12px}.story-values b{font-size:17px}.campus-section,.programs-section{padding-top:52px!important;padding-bottom:55px!important}.centered-head{margin-bottom:27px!important}.centered-head h2{font-size:36px!important}.centered-head p{font-size:15px}.campus-grid-ref,.program-grid-ref{grid-template-columns:1fr}.campus-card-ref{min-height:0;padding:23px 20px 20px}.campus-card-ref h3{font-size:24px}.campus-card-ref p{font-size:15px}.campus-card-bottom{font-size:12px}.program-card-ref{min-height:260px;padding:22px}.program-card-ref h3{font-size:22px}}
 
@@ -1830,7 +1911,7 @@ body>.toast{font-family:'Oswald','Arial Narrow',sans-serif!important}
   .final-nav .brand-copy em{font-size:clamp(7px,2.1vw,9px)!important;line-height:1.1!important;letter-spacing:.08em!important}
   .final-nav .nav-actions{display:contents!important}
   .final-nav .nav-actions>a[href="#/admissions"]{grid-area:apply!important}
-  .final-nav .nav-actions>button[onclick="openLogin()"]{grid-area:login!important}
+  .final-nav .nav-actions>button[onclick="openPortalLoginInNewTab()"]{grid-area:login!important}
   .final-nav .nav-actions>.hamb{grid-area:menu!important;display:grid!important;place-items:center!important;justify-self:end!important;width:48px!important;height:48px!important;padding:0!important;border:1px solid #e8edf4!important;border-radius:15px!important;background:#eef3f8!important;color:#24151b!important;font-size:25px!important;line-height:1!important}
   .final-nav .nav-actions>.btn-gold{display:inline-flex!important;justify-self:stretch!important;box-sizing:border-box!important;justify-content:center!important;align-items:center!important;width:100%!important;min-width:0!important;min-height:52px!important;padding:10px 7px!important;border-radius:16px!important;font-size:clamp(14px,4vw,17px)!important;white-space:nowrap!important;box-shadow:0 8px 18px rgba(212,20,61,.12)!important}
   .final-nav .nav-menu-row{display:none!important}
@@ -2184,7 +2265,7 @@ body>.toast{font-family:'Oswald','Arial Narrow',sans-serif!important}
   .final-nav .brand-copy strong{font-size:clamp(16px,4.1vw,24px)!important}
   .final-nav .brand-copy small{font-size:clamp(7px,1.8vw,11px)!important}
   .final-nav .nav-actions>a[href="#/admissions"]{grid-area:apply!important}
-  .final-nav .nav-actions>button[onclick="openLogin()"]{grid-area:login!important}
+  .final-nav .nav-actions>button[onclick="openPortalLoginInNewTab()"]{grid-area:login!important}
   .final-nav .nav-actions>.btn-gold{width:auto!important;min-width:0!important;min-height:52px!important;padding:10px 18px!important;border-radius:16px!important;font-size:clamp(14px,3.6vw,19px)!important}
   .hero.hero-brand{padding:clamp(100px,18vh,176px) 0 48px!important}
 }
@@ -2222,17 +2303,19 @@ body>.toast{font-family:'Oswald','Arial Narrow',sans-serif!important}
   .final-nav .brand-copy em{font-size:clamp(9px,2vw,12px)!important;line-height:1.1!important}
   .final-nav .nav-actions>.hamb{width:46px!important;height:60px!important;border-radius:15px!important;font-size:24px!important}
   .final-nav .nav-actions>.btn-gold{width:132px!important;min-width:132px!important;height:60px!important;min-height:60px!important;padding:10px 12px!important;border-radius:13px!important;font-size:clamp(16px,3.45vw,20px)!important;box-shadow:0 5px 12px rgba(212,20,61,.08)!important}
-  .final-nav .nav-actions>button[onclick="openLogin()"]{margin-right:10px!important}
+  .final-nav .nav-actions>button[onclick="openPortalLoginInNewTab()"]{margin-right:10px!important}
 }
 @media(max-width:380px){
   .final-nav .nav-actions>.btn-gold{width:100%!important;min-width:0!important;height:56px!important;min-height:56px!important;padding-inline:6px!important;font-size:14px!important}
-  .final-nav .nav-actions>button[onclick="openLogin()"]{margin-right:0!important}
+  .final-nav .nav-actions>button[onclick="openPortalLoginInNewTab()"]{margin-right:0!important}
 }
 
 
 /* Mobile header geometry rebuilt with independent brand/menu and action rows. */
 @media(max-width:700px){
-  .final-nav>.final-nav-wrap{padding:0 14px!important}
+  .final-nav>.final-nav-wrap{box-sizing:border-box!important;width:calc(100% - 3mm - 14px)!important;max-width:none!important;margin-left:3mm!important;margin-right:14px!important;padding:0!important}
+  .final-nav .brand-lockup{transform:translateX(-6px)!important}
+  .final-nav .brand-logo{border-radius:0!important;overflow:visible!important;object-fit:contain!important;object-position:center!important}
   .final-nav .nav-brand-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"brand menu" "actions actions"!important;align-items:center!important;justify-items:stretch!important;gap:clamp(20px,4vw,42px) 8px!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;padding:clamp(20px,4vw,42px) 0 clamp(24px,5vw,50px)!important;overflow:visible!important}
   .final-nav .brand-lockup{grid-area:brand!important;display:flex!important;align-items:center!important;min-width:0!important;max-width:100%!important;width:max-content!important;gap:clamp(8px,1.4vw,16px)!important;overflow:visible!important}
   .final-nav .brand-logo{flex:0 0 auto!important;width:clamp(56px,14vw,150px)!important;height:clamp(56px,14vw,150px)!important;object-fit:contain!important;border-radius:50%!important}
@@ -2311,7 +2394,7 @@ select:not([multiple]){-webkit-appearance:none!important;appearance:none!importa
 .final-nav .nav-menu-row>.final-links>.nav-drop>a>b{display:none!important}
 .final-nav .nav-menu-row>.final-links>.nav-drop>a::after{flex:0 0 11px!important;margin-left:6px!important}
 
-.events-empty-note{grid-column:1/-1;margin:0!important;padding:2px 0!important;text-align:center;font-size:15px!important;line-height:1.5!important;color:#806f75!important}
+.events-empty-note{grid-column:1/-1;max-width:570px;margin:32px auto!important;padding:30px 24px!important;text-align:center;font-size:18px!important;line-height:1.5!important;color:#806f75!important;background:#fff!important;border:1px solid #efd9df!important;border-radius:20px!important;box-shadow:0 12px 30px rgba(85,15,35,.06)!important}
 
 /* Course detail pages: animated overview and readable programme snapshot. */
 .course-showcase-section{overflow:hidden}
@@ -2516,3 +2599,300 @@ select:not([multiple]){-webkit-appearance:none!important;appearance:none!importa
 .assignment-icon svg{display:block;width:29px;height:29px;fill:currentColor}
 .portal .side-icon svg{display:block;width:21px;height:21px}
 .portal .hier-icon svg{display:block;width:24px;height:24px}
+
+@media(max-width:800px){
+  .final-nav .nav-actions{justify-content:center!important;gap:12px!important}
+  .final-nav .nav-actions>.btn-gold{flex:0 1 auto!important;width:min(190px,calc((100vw - 48px)/2))!important;min-width:0!important;max-width:190px!important;padding:9px 7px!important;font-size:clamp(13px,3.7vw,16px)!important}
+  .contact-strip .container{font-size:12px!important;gap:4px 10px!important}
+}
+@media(max-width:390px){
+  .final-nav .nav-actions{gap:9px!important}
+  .final-nav .nav-actions>.btn-gold{width:calc((100vw - 44px)/2)!important;font-size:13px!important}
+  .contact-strip .container{font-size:11px!important}
+}
+.contact-strip .container>span{font-size:inherit!important;line-height:1.25!important}
+.contact-location{display:inline-flex!important;align-items:center!important;gap:.42em!important}
+.contact-location-text,.contact-phone{font-size:inherit!important;line-height:1.25!important}
+.contact-pin{display:block;flex:0 0 1em;width:1em;height:1em;fill:#c4143c}
+@media(max-width:900px){
+  .final-nav .nav-brand-row .nav-actions>.btn-gold{flex:0 0 clamp(136px,23vw,190px)!important;width:clamp(136px,23vw,190px)!important;min-width:0!important;max-width:none!important;padding:9px 8px!important}
+}
+
+/* Fees page: fit the full content to narrow student portal screens. */
+@media(max-width:700px){
+  .portal-main:has(.fee-page){min-width:0!important;width:100%!important;overflow-x:hidden!important}
+  .fee-shell.fee-page,.fee-page>.fee-hero,.fee-page>.fee-overview,.fee-page>.fee-section-card,.fee-page>.fee-history{box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important}
+  .fee-hero-copy{width:100%!important;max-width:100%!important;min-width:0!important}
+  .fee-hero h2,.fee-hero p,.fee-section-heading h3,.fee-section-heading p{max-width:100%!important;overflow-wrap:anywhere!important;word-break:normal!important}
+  .fee-row:not(.fee-header){grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;padding:12px!important;min-width:0!important}
+  .fee-row:not(.fee-header)>div{box-sizing:border-box!important;min-width:0!important}
+  .fee-row:not(.fee-header)>div:nth-child(1){grid-column:1/-1!important;grid-row:1!important;min-height:34px!important;padding:4px 6px!important}
+  .fee-row:not(.fee-header)>div:nth-child(2){grid-column:1/-1!important;grid-row:2!important;justify-content:flex-start!important;min-height:58px!important;padding:5px 6px 9px!important}
+  .fee-row:not(.fee-header)>div:nth-child(3){display:none!important}
+  .fee-row:not(.fee-header)>div:nth-child(4){grid-column:1!important;grid-row:3!important;min-height:56px!important;padding:7px 6px 2px!important}
+  .fee-row:not(.fee-header)>div:nth-child(5){grid-column:2!important;grid-row:3!important;min-height:56px!important;padding:7px 6px 2px!important}
+  .fee-total{grid-column:1/-1!important;min-width:0!important}
+  .fee-semester-icon{flex-basis:36px!important;width:36px!important;height:36px!important}
+  .fee-row>div:nth-child(2) b{font-size:16px!important}
+  .fee-row>div:nth-child(2) small{font-size:11px!important}
+}
+@media(max-width:1100px){
+  .final-nav .nav-brand-row .brand-logo{width:clamp(78px,15vw,132px)!important;height:clamp(78px,15vw,132px)!important}
+  .final-nav .nav-brand-row .brand-copy strong{font-size:clamp(19px,4.5vw,38px)!important}
+  .final-nav .nav-brand-row .brand-copy small{font-size:clamp(9px,2vw,17px)!important}
+  .final-nav .nav-brand-row .brand-copy em{font-size:clamp(10px,2.2vw,18px)!important}
+  .final-nav .nav-brand-row .nav-actions{display:flex!important;justify-content:flex-end!important;gap:8px!important;padding-right:0!important}
+  .final-nav .nav-brand-row .nav-actions>.btn-gold{flex:0 0 clamp(130px,19vw,176px)!important;width:clamp(130px,19vw,176px)!important;min-width:0!important;max-width:none!important;padding:9px 7px!important;font-size:clamp(14px,2.2vw,19px)!important}
+}
+
+/* One shared, filled graduation-cap mark across every portal surface. */
+.portal .graduation-cap-icon{display:block!important;flex:none!important;color:#c91c42!important;fill:currentColor!important}
+.portal .side-icon .graduation-cap-icon{width:21px!important;height:21px!important}
+.portal .hier-icon .graduation-cap-icon{width:28px!important;height:28px!important}
+.portal .side-icon:has(>.graduation-cap-icon){background:#fff0f3!important;color:#c91c42!important}
+.portal .side nav a.active .side-icon:has(>.graduation-cap-icon){background:#fff0f3!important;color:#c91c42!important}
+.portal .hier-icon:has(>.graduation-cap-icon){background:#fff0f3!important;color:#c91c42!important}
+.portal .profile-avatar:has(>.graduation-cap-icon),.portal .top-avatar:has(>.graduation-cap-icon){background:#fff0f3!important;border-color:#f1d5dd!important;color:#c91c42!important}
+.portal .profile-avatar>.graduation-cap-icon{width:52px!important;height:52px!important}
+.portal .top-avatar>.graduation-cap-icon{width:24px!important;height:24px!important}
+
+.result-sem-card .result-card-icon{width:52px;height:52px;border-radius:16px;background:#fff0f3;display:grid;place-items:center;margin-bottom:14px;color:#c91c42}.result-sem-card .result-card-icon svg{width:29px;height:29px;display:block;fill:currentColor}
+
+/* Attendance score ring: red arc follows the displayed percentage exactly. */
+.student-attendance-score{position:relative!important;isolation:isolate!important;border:0!important;padding:7px!important;background:conic-gradient(from -90deg,#b31939 var(--attendance-pct,0%),#f4e2e7 0)!important}
+.student-attendance-score:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#fff;z-index:0}
+.student-attendance-score strong,.student-attendance-score span{position:relative;z-index:1}
+/* Keep attendance landing pages consistent across student, teacher and admin portals. */
+.attendance-page .hierarchy-head{padding:clamp(20px,3vw,30px);border:1px solid #efd9df;border-radius:20px;background:linear-gradient(125deg,#fff 0%,#fff8f9 72%,#fffaf0 100%);box-shadow:0 8px 24px rgba(78,18,37,.04)}
+.attendance-page .hierarchy-card{border-color:#efdee2;border-radius:19px;box-shadow:0 7px 20px rgba(76,20,36,.04)}
+.attendance-page .semester-card-final{border-color:#efdee2;border-radius:18px;box-shadow:0 7px 20px rgba(76,20,36,.04)}
+
+.recognition-note{margin-top:32px!important;animation:recognitionNoteIn .65s cubic-bezier(.2,.7,.25,1) both}
+@keyframes recognitionNoteIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.recognition-note{animation:none}}
+
+.program-grid-ref .program-card-ref{animation:departmentCardIn .55s cubic-bezier(.2,.7,.25,1) both}
+.program-grid-ref .program-card-ref:nth-child(1){animation-delay:0s}
+.program-grid-ref .program-card-ref:nth-child(2){animation-delay:.12s}
+.program-grid-ref .program-card-ref:nth-child(3){animation-delay:.24s}
+.program-grid-ref .program-card-ref:nth-child(4){animation-delay:.36s}
+.recognition-note{animation-delay:1s}
+@keyframes departmentCardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.program-grid-ref .program-card-ref,.recognition-note{animation:none}}
+@media(max-width:650px){
+  .program-grid-ref .program-card-ref:nth-child(1){animation-delay:0s}
+  .program-grid-ref .program-card-ref:nth-child(2){animation-delay:.25s}
+  .program-grid-ref .program-card-ref:nth-child(3){animation-delay:.5s}
+  .program-grid-ref .program-card-ref:nth-child(4){animation-delay:.75s}
+  .programs-section .recognition-note{animation-delay:1.4s}
+}
+
+/* Student result sheet: prevent wide mark tables from escaping the card. */
+.result-page,.result-sheet,.result-sheet .table-wrap{min-width:0;max-width:100%}
+.result-sheet{overflow:hidden}
+.student-result-marks{width:100%;table-layout:fixed}
+.student-result-marks th:first-child,.student-result-marks td:first-child{width:52%}
+.student-result-marks th:nth-child(2),.student-result-marks td:nth-child(2){width:20%}
+.student-result-marks th:nth-child(3),.student-result-marks td:nth-child(3){width:28%}
+.student-result-marks td{white-space:normal}
+@media(max-width:700px){
+  .result-page{gap:14px}
+  .result-header{gap:12px}
+  .result-header h2{font-size:27px}
+  .result-sheet{padding:14px;border-radius:18px}
+  .result-student{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:9px 12px;padding:14px;border-radius:15px;font-size:12px}
+  .student-result-marks,.student-result-marks tbody,.student-result-marks tr,.student-result-marks td{display:block;width:100%}
+  .student-result-marks{border-collapse:separate;border-spacing:0 9px}
+  .student-result-marks thead{display:none}
+  .student-result-marks tr{padding:10px 13px;border:1px solid #efdee2;border-radius:14px;background:#fff;box-shadow:0 4px 12px rgba(76,20,36,.035)}
+  .student-result-marks td{display:grid;grid-template-columns:minmax(82px,.72fr) minmax(0,1.4fr);gap:10px;align-items:start;padding:7px 0;border:0;border-bottom:1px solid #f3e8eb;white-space:normal;overflow-wrap:anywhere;font-size:13px}
+  .student-result-marks td:last-child{border-bottom:0}
+  .student-result-marks td:before{content:attr(data-label);color:#8a6f78;font:700 10px 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.08em}
+}
+/* Let the shared scroll-reveal cascade control department card direction on all screen sizes. */
+.program-grid-ref .program-card-ref{animation:none!important}
+
+/* Use the login modal's themed close control consistently across dialogs. */
+.close{width:50px!important;height:50px!important;min-width:50px!important;border-radius:13px!important;display:grid!important;place-items:center!important;padding:0!important;font-size:28px!important;line-height:1!important;font-weight:700!important;color:#5b1227!important;background:#fff0f3!important;border:1px solid #efccd5!important;box-shadow:0 4px 12px rgba(91,8,30,.08)!important;transition:background .18s ease,color .18s ease,transform .18s ease!important}
+.close:hover{background:#ffe2e9!important;color:#a4142f!important;transform:scale(1.03)!important}
+@media(max-width:650px){.close{width:46px!important;height:46px!important;min-width:46px!important;font-size:25px!important}}
+
+/* Compact day-type control and mobile-first attendance roster cards. */
+.daily-register-controls.daily-register-toolbar{display:flex;align-items:center;gap:14px;margin:12px 0;padding:0;background:none;border:0;border-radius:0}
+.daily-register-toolbar label{display:flex!important;align-items:center;gap:9px;flex:0 0 auto;font-size:12px!important}
+.daily-register-toolbar select{width:auto!important;min-width:142px;min-height:40px!important;padding:7px 12px!important}
+.daily-register-toolbar .daily-register-message{flex:1;min-height:40px!important;padding:8px 12px!important;background:#fff8e7!important;border:1px solid #f2dfa4!important;color:#785d12!important}
+.daily-register-message.submitted{background:#eff8f2!important;border-color:#d9ecdf!important;color:#276842!important}
+@media(max-width:700px){
+  .attendance-panel.daily-register-card{padding:14px!important}
+  .daily-register-toolbar{align-items:stretch!important;flex-direction:column;gap:8px!important;margin:9px 0!important}
+  .daily-register-toolbar label{justify-content:space-between;width:100%}
+  .daily-register-toolbar select{flex:1;max-width:62%}
+  .daily-register-toolbar .daily-register-message{width:100%;font-size:11px!important}
+  .daily-register-card .table-wrap{overflow:visible!important;margin-top:10px!important;border:0!important;background:transparent!important}
+  .daily-register-card .attendance-table,.daily-register-card .attendance-table tbody,.daily-register-card .attendance-table tr,.daily-register-card .attendance-table td{display:block;width:100%;min-width:0}
+  .daily-register-card .attendance-table{border:0!important;border-collapse:separate!important;border-spacing:0!important}
+  .daily-register-card .attendance-table thead{display:none}
+  .daily-register-card .attendance-table tbody{display:grid;gap:10px}
+  .daily-register-card .attendance-table tr{padding:12px;border:1px solid #efdee2;border-radius:15px;background:linear-gradient(145deg,#fff 0%,#fffafb 100%);box-shadow:0 5px 15px rgba(76,20,36,.045)}
+  .daily-register-card .attendance-table td{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:center;padding:7px 0!important;border:0!important;white-space:normal!important;text-align:left}
+  .daily-register-card .attendance-table td:before{content:attr(data-label);color:#927781;font:700 10px 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.08em}
+  .daily-register-card .attendance-table td[data-label="Photo"]{display:none}
+  .daily-register-card .attendance-table td[data-label="Student"]{display:block;padding-bottom:10px!important;margin-bottom:4px;border-bottom:1px solid #f1e5e8!important}
+  .daily-register-card .attendance-table td[data-label="Student"]:before{display:block;margin-bottom:5px}
+  .daily-register-card .attendance-table .attendance-student-id{display:block}
+  .daily-register-card .attendance-table td[data-label="Mark"],.daily-register-card .attendance-table td[data-label="Admin edit"]{display:block;margin-top:3px;padding-top:10px!important;border-top:1px solid #f1e5e8!important}
+  .daily-register-card .attendance-table td[data-label="Mark"]:before,.daily-register-card .attendance-table td[data-label="Admin edit"]:before{display:block;margin-bottom:8px}
+  .daily-register-card .attendance-row-actions{display:flex;gap:8px}
+  .daily-register-card .attendance-row-actions .att-action{flex:1;min-height:40px}
+  .daily-register-card .attendance-table td.empty{padding:20px!important;text-align:center}
+  .daily-register-card .attendance-table td.empty:before{content:none}
+}
+
+/* Compact attendance student cards; selected marks and clear action stay obvious. */
+.att-action.selected{outline:2px solid currentColor;outline-offset:1px;box-shadow:0 3px 10px rgba(75,20,35,.12);font-weight:700}
+.att-action.clear{background:#fff0f3;color:#a4142f;border:1px solid #f0cbd5}
+.att-action.clear:disabled{background:#f5f2f3;color:#a89aa0;border-color:#e9e2e5;opacity:.75}
+@media(max-width:700px){
+  .daily-register-card .attendance-table tr{padding:9px 11px}
+  .daily-register-card .attendance-table td{grid-template-columns:62px minmax(0,1fr);gap:6px;padding:5px 0!important;font-size:13px}
+  .daily-register-card .attendance-table td[data-label="Student"]{padding-bottom:8px!important;margin-bottom:2px}
+  .daily-register-card .attendance-table td[data-label="Mark"],.daily-register-card .attendance-table td[data-label="Admin edit"]{padding-top:8px!important}
+  .daily-register-card .attendance-row-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .daily-register-card .attendance-row-actions .att-action{min-width:0;min-height:36px;padding:6px 3px!important;margin:0!important;border-radius:9px;font-size:11px!important;white-space:nowrap}
+}
+
+/* One consistent semester-card style throughout teacher and admin portals. */
+.portal .semester-card-final,.portal .attendance-semester-card{box-sizing:border-box!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:10px!important;min-width:0!important;min-height:218px!important;padding:30px!important;border:1px solid #efd9df!important;border-radius:22px!important;background:linear-gradient(145deg,#fff 0%,#fffafb 100%)!important;color:#351522!important;box-shadow:0 8px 22px rgba(76,20,36,.045)!important;text-decoration:none!important;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important}
+.portal .semester-card-final:hover,.portal .attendance-semester-card:hover{transform:translateY(-3px)!important;border-color:#d8a1ae!important;box-shadow:0 15px 30px rgba(114,13,36,.1)!important}
+.portal .semester-card-final>span,.portal .attendance-semester-card>span{display:block!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#a4142f!important;font:700 14px 'Oswald',sans-serif!important;letter-spacing:.11em!important}
+.portal .semester-card-final>b,.portal .attendance-semester-card>b{display:block!important;margin:0!important;padding:0!important;color:#5c1327!important;font:400 54px 'Anton',sans-serif!important;line-height:1!important}
+.portal .semester-card-final>small,.portal .attendance-semester-card>small{display:block!important;margin:0!important;padding:0!important;border:0!important;color:#80616d!important;font:15px 'Oswald',sans-serif!important}
+@media(max-width:700px){.portal .semester-card-final,.portal .attendance-semester-card{min-height:174px!important;padding:20px!important;border-radius:18px!important}.portal .semester-card-final>b,.portal .attendance-semester-card>b{font-size:43px!important}.portal .semester-card-final>span,.portal .attendance-semester-card>span{font-size:12px!important}.portal .semester-card-final>small,.portal .attendance-semester-card>small{font-size:13px!important}}
+
+/* Simplified attendance summary: distinct full-width metric rows on phones. */
+@media(max-width:700px){
+  .attendance-page .attendance-overview-cards{grid-template-columns:minmax(0,1fr)!important;gap:10px!important;margin:0!important}
+  .attendance-page .attendance-overview-cards .attendance-stat{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label value" "detail value";align-items:center!important;column-gap:14px!important;row-gap:3px!important;min-height:78px!important;padding:12px 15px 12px 18px!important;border:1px solid #efdee2!important;border-radius:15px!important;background:linear-gradient(110deg,#fff 0%,#fffafb 100%)!important;box-shadow:0 5px 14px rgba(76,20,36,.035)!important}
+  .attendance-page .attendance-overview-cards .attendance-stat small{grid-area:label!important;margin:0!important;color:#8a6974!important;font:700 10px 'Oswald',sans-serif!important;letter-spacing:.1em!important;text-transform:uppercase}
+  .attendance-page .attendance-overview-cards .attendance-stat b{grid-area:value!important;justify-self:end!important;margin:0!important;color:#951532!important;font:400 clamp(22px,6vw,29px) 'Anton',sans-serif!important;line-height:1.05!important;text-align:right!important}
+  .attendance-page .attendance-overview-cards .attendance-stat span{grid-area:detail!important;margin:0!important;color:#806b74!important;font:12px/1.3 'Oswald',sans-serif!important}
+  .attendance-page .attendance-overview-cards .attendance-stat:last-child b{font-size:clamp(17px,4.5vw,22px)!important}
+}
+
+/* Unified course selector cards, matching the reference across portal sections. */
+.portal .portal-course-card{box-sizing:border-box!important;display:grid!important;grid-template-columns:88px minmax(0,1fr) 84px!important;grid-template-areas:"icon kicker kicker" "title title count" "note note note"!important;align-items:center!important;column-gap:24px!important;row-gap:10px!important;min-width:0!important;min-height:230px!important;padding:32px 40px!important;border:1.5px solid #efd9df!important;border-radius:26px!important;background:#fff!important;box-shadow:0 8px 22px rgba(76,20,36,.045)!important;color:inherit!important;text-decoration:none!important;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important}
+.portal .portal-course-card:hover{transform:translateY(-3px)!important;border-color:#d8a1ae!important;box-shadow:0 15px 30px rgba(114,13,36,.1)!important}
+.portal .portal-course-card>.hier-icon{grid-area:icon!important;display:grid!important;place-items:center!important;width:88px!important;height:88px!important;margin:0!important;padding:0!important;border:0!important;border-radius:23px!important;background:#fff0f3!important;color:#c91c42!important;font-size:0!important}
+.portal .portal-course-card>.hier-icon svg{display:block!important;width:46px!important;height:46px!important;fill:currentColor!important}
+.portal .portal-course-card>.kicker{grid-area:kicker!important;margin:0!important;padding:0!important;color:#e41645!important;font:700 14px 'Oswald',sans-serif!important;letter-spacing:.14em!important;text-transform:uppercase!important}
+.portal .portal-course-card>h3{grid-area:title!important;min-width:0!important;margin:0!important;color:#351522!important;font:400 30px 'Anton',sans-serif!important;line-height:1.15!important}
+.portal .portal-course-card>strong{grid-area:count!important;justify-self:end!important;display:grid!important;place-items:center!important;box-sizing:border-box!important;width:84px!important;height:84px!important;margin:0!important;padding:0!important;border:0!important;border-radius:22px!important;background:#fff0f3!important;color:#a4142f!important;font:400 48px 'Anton',sans-serif!important;line-height:1!important}
+.portal .portal-course-card>small{grid-area:note!important;display:block!important;margin:5px 0 0!important;padding:18px 0 0!important;border:0!important;border-top:1px solid #efdee2!important;color:#806b74!important;font:16px 'Oswald',sans-serif!important}
+@media(max-width:700px){.portal .portal-course-card{grid-template-columns:56px minmax(0,1fr) 56px!important;column-gap:13px!important;row-gap:9px!important;min-height:184px!important;padding:18px!important;border-radius:19px!important}.portal .portal-course-card>.hier-icon{width:56px!important;height:56px!important;border-radius:17px!important}.portal .portal-course-card>.hier-icon svg{width:32px!important;height:32px!important}.portal .portal-course-card>.kicker{font-size:11px!important;letter-spacing:.12em!important}.portal .portal-course-card>h3{font-size:24px!important}.portal .portal-course-card>strong{width:56px!important;height:56px!important;border-radius:17px!important;font-size:32px!important}.portal .portal-course-card>small{margin-top:4px!important;padding-top:12px!important;font-size:13px!important}}
+
+
+/* Keep the mobile attendance hierarchy visually aligned with desktop. */
+@media(max-width:800px){
+  .attendance-page .attendance-banner{grid-template-columns:minmax(0,1fr)!important;gap:16px!important;padding:clamp(18px,4vw,26px)!important;border-radius:20px!important}
+  .attendance-page .attendance-banner h2{font-size:clamp(27px,6vw,36px)!important}
+  .attendance-page .attendance-banner p{font-size:clamp(14px,3.3vw,17px)!important}
+  .attendance-page .attendance-banner-actions{grid-column:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;width:100%!important;max-width:none!important}
+  .attendance-page .attendance-banner-actions .btn{display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;min-height:58px!important;padding:10px 12px!important;font-size:clamp(15px,3.5vw,19px)!important;line-height:1.2!important;text-align:center!important;white-space:normal!important}
+  .attendance-page .attendance-overview-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .attendance-page .attendance-overview-cards .attendance-stat{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-areas:none!important;align-content:center!important;justify-items:start!important;gap:5px!important;min-height:108px!important;padding:15px 16px 15px 19px!important;border:1px solid #efdee2!important;border-radius:17px!important;background:#fff!important;box-shadow:0 6px 18px rgba(76,20,36,.035)!important}
+  .attendance-page .attendance-overview-cards .attendance-stat small{grid-area:auto!important;margin:0!important;font-size:10px!important;letter-spacing:.1em!important}
+  .attendance-page .attendance-overview-cards .attendance-stat b{grid-area:auto!important;justify-self:start!important;margin:0!important;font-size:clamp(22px,5vw,28px)!important;text-align:left!important}
+  .attendance-page .attendance-overview-cards .attendance-stat span{grid-area:auto!important;margin:0!important;font-size:12px!important;line-height:1.3!important}
+  .attendance-page .attendance-overview-cards .attendance-stat:last-child b{font-size:clamp(18px,4vw,23px)!important}
+}
+@media(max-width:420px){.attendance-page .attendance-banner-actions{grid-template-columns:1fr!important}.attendance-page .attendance-banner-actions .btn{min-height:50px!important}.attendance-page .attendance-overview-cards .attendance-stat{min-height:98px!important;padding:12px 12px 12px 16px!important}}
+
+/* Compact, wide course cards across student, teacher, and admin portals. */
+.portal .portal-course-card{grid-template-columns:68px minmax(0,1fr) 68px!important;grid-template-areas:"icon kicker count" "icon title count" "note note note"!important;column-gap:20px!important;row-gap:3px!important;min-height:154px!important;padding:18px 24px!important;border-radius:22px!important}
+.portal .portal-course-card>.hier-icon{grid-area:icon!important;width:68px!important;height:68px!important;border-radius:20px!important}
+.portal .portal-course-card>.hier-icon svg{width:38px!important;height:38px!important}
+.portal .portal-course-card>.kicker{grid-area:kicker!important;align-self:end!important;font-size:12px!important}
+.portal .portal-course-card>h3{grid-area:title!important;align-self:start!important;font-size:27px!important;line-height:1.08!important}
+.portal .portal-course-card>strong{grid-area:count!important;align-self:center!important;width:66px!important;height:66px!important;border-radius:20px!important;font-size:39px!important}
+.portal .portal-course-card>small{grid-area:note!important;margin:10px 0 0!important;padding:10px 0 0!important;border-top:1px solid #efdee2!important;font-size:14px!important}
+@media(max-width:700px){.portal .portal-course-card{grid-template-columns:56px minmax(0,1fr) 56px!important;column-gap:14px!important;row-gap:2px!important;min-height:132px!important;padding:14px 16px!important;border-radius:18px!important}.portal .portal-course-card>.hier-icon{width:56px!important;height:56px!important;border-radius:16px!important}.portal .portal-course-card>.hier-icon svg{width:32px!important;height:32px!important}.portal .portal-course-card>.kicker{font-size:10px!important}.portal .portal-course-card>h3{font-size:23px!important}.portal .portal-course-card>strong{width:54px!important;height:54px!important;border-radius:16px!important;font-size:31px!important}.portal .portal-course-card>small{margin-top:8px!important;padding-top:8px!important;font-size:12px!important}}
+@media(max-width:390px){.portal .portal-course-card{grid-template-columns:48px minmax(0,1fr) 48px!important;column-gap:10px!important;min-height:120px!important;padding:12px!important}.portal .portal-course-card>.hier-icon{width:48px!important;height:48px!important;border-radius:14px!important}.portal .portal-course-card>.hier-icon svg{width:28px!important;height:28px!important}.portal .portal-course-card>h3{font-size:20px!important}.portal .portal-course-card>strong{width:46px!important;height:46px!important;border-radius:14px!important;font-size:27px!important}}
+
+
+/* Four attendance summary metrics shown as four horizontal rows on every screen. */
+.attendance-page .attendance-register-stats{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;margin:0!important}
+.attendance-page .attendance-register-stats .attendance-stat{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label value" "detail value"!important;align-items:center!important;column-gap:16px!important;row-gap:3px!important;min-height:82px!important;padding:13px 22px 13px 24px!important;border:1px solid #efdee2!important;border-radius:17px!important;background:#fff!important;box-shadow:0 6px 18px rgba(76,20,36,.035)!important}
+.attendance-page .attendance-register-stats .attendance-stat small{grid-area:label!important;margin:0!important;color:#8a6974!important;font:700 11px 'Oswald',sans-serif!important;letter-spacing:.1em!important;text-transform:uppercase}
+.attendance-page .attendance-register-stats .attendance-stat b{grid-area:value!important;justify-self:end!important;margin:0!important;color:#951532!important;font:400 clamp(24px,2.6vw,31px) 'Anton',sans-serif!important;line-height:1.05!important;text-align:right!important}
+.attendance-page .attendance-register-stats .attendance-stat span{grid-area:detail!important;margin:0!important;color:#806b74!important;font:14px/1.3 'Oswald',sans-serif!important}
+.attendance-page .attendance-register-stats .attendance-stat:last-child b{font-size:clamp(20px,2.1vw,26px)!important}
+@media(max-width:700px){.attendance-page .attendance-register-stats{grid-template-columns:minmax(0,1fr)!important;gap:9px!important}.attendance-page .attendance-register-stats .attendance-stat{min-height:76px!important;padding:11px 16px 11px 19px!important;border-radius:15px!important}.attendance-page .attendance-register-stats .attendance-stat span{font-size:12px!important}.attendance-page .attendance-register-stats .attendance-stat:last-child b{font-size:clamp(19px,5vw,23px)!important}}
+
+/* Teacher attendance overview metrics use three full-width rows on every screen. */
+.teacher-attendance-home .teacher-overview-cards{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;margin:0!important}
+.teacher-attendance-home .teacher-overview-cards .attendance-stat{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label value" "detail value"!important;align-items:center!important;column-gap:16px!important;row-gap:3px!important;min-height:82px!important;padding:13px 22px 13px 24px!important;border:1px solid #efdee2!important;border-radius:17px!important;background:#fff!important;box-shadow:0 6px 18px rgba(76,20,36,.035)!important}
+.teacher-attendance-home .teacher-overview-cards .attendance-stat small{grid-area:label!important;margin:0!important;color:#8a6974!important;font:700 11px 'Oswald',sans-serif!important;letter-spacing:.1em!important;text-transform:uppercase}
+.teacher-attendance-home .teacher-overview-cards .attendance-stat b{grid-area:value!important;justify-self:end!important;margin:0!important;color:#951532!important;font:400 clamp(24px,2.6vw,31px) 'Anton',sans-serif!important;line-height:1.05!important;text-align:right!important}
+.teacher-attendance-home .teacher-overview-cards .attendance-stat span{grid-area:detail!important;margin:0!important;color:#806b74!important;font:14px/1.3 'Oswald',sans-serif!important}
+@media(max-width:700px){.teacher-attendance-home .teacher-overview-cards{grid-template-columns:minmax(0,1fr)!important;gap:9px!important}.teacher-attendance-home .teacher-overview-cards .attendance-stat{min-height:76px!important;padding:11px 16px 11px 19px!important;border-radius:15px!important}.teacher-attendance-home .teacher-overview-cards .attendance-stat span{font-size:12px!important}}
+
+/* Compact horizontal semester cards, shared by student, teacher, and admin portals. */
+.portal .semester-grid-final{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))!important;gap:14px!important;align-items:stretch!important}
+.portal .semester-grid-final .semester-card-final,.portal .semester-grid-final .attendance-semester-card{box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"label count" "note count"!important;align-content:center!important;align-items:center!important;justify-content:stretch!important;column-gap:18px!important;row-gap:5px!important;min-width:0!important;min-height:126px!important;padding:19px 22px!important;border:1px solid #efd9df!important;border-radius:20px!important;background:#fff!important;box-shadow:0 7px 20px rgba(76,20,36,.04)!important}
+.portal .semester-grid-final .semester-card-final>span,.portal .semester-grid-final .attendance-semester-card>span{grid-area:label!important;align-self:end!important;margin:0!important;color:#a4142f!important;font:700 13px 'Oswald',sans-serif!important;letter-spacing:.11em!important}
+.portal .semester-grid-final .semester-card-final>b,.portal .semester-grid-final .attendance-semester-card>b{grid-area:count!important;align-self:center!important;margin:0!important;color:#5c1327!important;font:400 42px 'Anton',sans-serif!important;line-height:1!important}
+.portal .semester-grid-final .semester-card-final>small,.portal .semester-grid-final .attendance-semester-card>small{grid-area:note!important;align-self:start!important;margin:0!important;padding:0!important;border:0!important;color:#80616d!important;font:14px 'Oswald',sans-serif!important}
+.portal .semester-grid-final .semester-card-final:hover,.portal .semester-grid-final .attendance-semester-card:hover{transform:translateY(-2px)!important;border-color:#d8a1ae!important;box-shadow:0 12px 24px rgba(114,13,36,.09)!important}
+@media(max-width:700px){.portal .semester-grid-final{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}.portal .semester-grid-final .semester-card-final,.portal .semester-grid-final .attendance-semester-card{min-height:104px!important;padding:14px 17px!important;border-radius:16px!important;column-gap:14px!important}.portal .semester-grid-final .semester-card-final>span,.portal .semester-grid-final .attendance-semester-card>span{font-size:11px!important}.portal .semester-grid-final .semester-card-final>b,.portal .semester-grid-final .attendance-semester-card>b{font-size:35px!important}.portal .semester-grid-final .semester-card-final>small,.portal .semester-grid-final .attendance-semester-card>small{font-size:12px!important}}
+
+/* Shared announcement cards for all portal roles. */
+.portal-notice-board{box-sizing:border-box!important;display:grid!important;gap:22px!important;min-width:0!important;padding:clamp(18px,2.5vw,30px)!important;border:1px solid #efd9df!important;border-radius:24px!important;background:linear-gradient(145deg,#fff 0%,#fffafb 100%)!important;box-shadow:0 12px 30px rgba(76,20,36,.055)!important}
+.portal-notice-head,.admin-notice-section-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;margin:0!important;padding:0 0 18px!important;border-bottom:1px solid #f0dfe3!important}
+.portal-notice-head h2,.admin-notice-section-head h2{margin:5px 0 6px!important;color:#351522!important;font:400 clamp(25px,3vw,34px) 'Anton',sans-serif!important}
+.portal-notice-head p,.admin-notice-section-head p{margin:0!important;color:#806b74!important;font:15px/1.5 'Oswald',sans-serif!important}
+.notice-count-chip{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #f2d7df;border-radius:999px;background:#fff0f3;color:#a4142f;font:600 13px 'Oswald',sans-serif}
+.notice-count-chip b{font:400 21px 'Anton',sans-serif}
+.portal-notice-list{display:grid;gap:12px;min-width:0}
+.portal-notice-card,.admin-notice-card{box-sizing:border-box;position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);align-items:start;gap:16px;min-width:0;padding:18px;border:1px solid #f0dfe3;border-radius:18px;background:#fff;box-shadow:0 5px 16px rgba(76,20,36,.035);transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+.portal-notice-card:before,.admin-notice-card:before{position:absolute;inset:15px auto 15px 0;width:4px;border-radius:0 4px 4px 0;background:#c51c43;content:""}
+.portal-notice-card:hover,.admin-notice-card:hover{transform:translateY(-2px);border-color:#e1b6c0;box-shadow:0 10px 22px rgba(76,20,36,.075)}
+.portal-notice-index{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:#fff0f3;color:#c51c43;font:400 20px 'Anton',sans-serif}
+.portal-notice-copy{min-width:0}
+.portal-notice-meta,.admin-notice-card-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-bottom:7px}
+.portal-notice-type{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;background:#fff0f3;color:#a4142f;font:700 10px 'Oswald',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.portal-notice-meta time,.admin-notice-card-top time{color:#88747c;font:13px 'Oswald',sans-serif}
+.portal-notice-card h3,.admin-notice-card h3{margin:0 0 6px;color:#351522;font:400 22px/1.2 'Anton',sans-serif;overflow-wrap:anywhere}
+.portal-notice-card p,.admin-notice-card p{margin:0;color:#786a70;font:15px/1.55 'Oswald',sans-serif;overflow-wrap:anywhere}
+.portal-notice-empty{display:grid;justify-items:center;gap:7px;padding:38px 20px;border:1px dashed #e8cbd3;border-radius:18px;background:#fffafb;text-align:center}
+.portal-notice-empty>span{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#fff0f3;color:#b3123d;font:400 24px 'Anton',sans-serif}
+.portal-notice-empty h3{margin:4px 0 0;color:#351522;font:400 22px 'Anton',sans-serif}
+.portal-notice-empty p{margin:0;color:#806b74;font:14px/1.5 'Oswald',sans-serif}
+.admin-notices-page{display:grid;gap:22px;min-width:0}
+.admin-notice-compose,.admin-notice-library{box-sizing:border-box;min-width:0;padding:clamp(18px,2.5vw,28px);border:1px solid #efd9df;border-radius:22px;background:linear-gradient(145deg,#fff 0%,#fffafb 100%);box-shadow:0 9px 24px rgba(76,20,36,.045)}
+.admin-notice-section-head{margin-bottom:18px!important}
+.admin-notice-mark{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border:1px solid #f2d7df;border-radius:16px;background:#fff0f3;color:#bd153e;font:400 27px 'Oswald',sans-serif}
+.admin-notice-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 16px}
+.admin-notice-form label{display:grid;gap:7px;color:#6e535c;font:600 13px 'Oswald',sans-serif}
+.admin-notice-form input,.admin-notice-form textarea{box-sizing:border-box;width:100%;min-width:0;border:1px solid #ebd6dc;border-radius:12px;background:#fff;padding:12px 14px;color:#351522;font:15px 'Oswald',sans-serif;outline:none}
+.admin-notice-form input:focus,.admin-notice-form textarea:focus{border-color:#c51c43;box-shadow:0 0 0 3px rgba(197,28,67,.1)}
+.admin-notice-form textarea{min-height:94px;resize:vertical}
+.admin-notice-form .admin-notice-description{grid-column:1/-1}
+.admin-notice-form>.btn{justify-self:start;min-height:46px;padding:10px 17px!important;border-radius:12px!important}
+.admin-notice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.admin-notice-card{grid-template-columns:minmax(0,1fr);gap:4px;padding:17px 18px 18px 20px}
+.admin-notice-card:before{inset:14px auto 14px 0}
+.admin-notice-card-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;margin-bottom:7px}
+.admin-notice-card-top .btn{grid-column:3;grid-row:1/3;align-self:start}
+.admin-notice-card h3{font-size:20px}
+@media(max-width:760px){.portal-notice-board{gap:16px;padding:16px!important;border-radius:18px!important}.portal-notice-head,.admin-notice-section-head{align-items:flex-start!important;gap:12px!important;padding-bottom:14px!important}.portal-notice-head h2,.admin-notice-section-head h2{font-size:25px!important}.portal-notice-head p,.admin-notice-section-head p{font-size:13px!important}.notice-count-chip{gap:6px;padding:8px 10px;font-size:11px}.notice-count-chip b{font-size:18px}.portal-notice-card{grid-template-columns:42px minmax(0,1fr);gap:11px;padding:14px 13px}.portal-notice-card:before{inset-block:12px}.portal-notice-index{width:40px;height:40px;border-radius:13px;font-size:17px}.portal-notice-card h3{font-size:19px}.portal-notice-card p,.admin-notice-card p{font-size:13px}.portal-notice-meta{gap:6px;margin-bottom:6px}.portal-notice-meta time,.admin-notice-card-top time{font-size:12px}.admin-notices-page{gap:14px}.admin-notice-compose,.admin-notice-library{padding:16px;border-radius:18px}.admin-notice-form{grid-template-columns:minmax(0,1fr);gap:11px}.admin-notice-form .admin-notice-description{grid-column:auto}.admin-notice-grid{grid-template-columns:minmax(0,1fr)}.admin-notice-card-top{grid-template-columns:minmax(0,1fr) auto;gap:6px 8px}.admin-notice-card-top time{grid-column:1;grid-row:2}.admin-notice-card-top .btn{grid-column:2;grid-row:1/3}}
+@media(max-width:420px){.portal-notice-head,.admin-notice-section-head{flex-direction:column!important}.portal-notice-head .notice-count-chip,.admin-notice-section-head .notice-count-chip{align-self:flex-start}.portal-notice-card{grid-template-columns:36px minmax(0,1fr);gap:9px;padding:12px 10px}.portal-notice-index{width:34px;height:34px;border-radius:11px;font-size:15px}.portal-notice-card h3{font-size:18px}.admin-notice-card{padding:14px 12px 14px 15px}.admin-notice-card h3{font-size:18px}}
+
+/* Nudge the footer identity column slightly left without shifting other columns. */
+.footer-grid>div:first-child{transform:translateX(-8px)}
+@media(max-width:620px){.footer-grid>div:first-child{transform:translateX(-4px)}}
+
+/* Clean standalone login tab: white canvas and a soft rose card outline. */
+html.portal-login-standalone,html.portal-login-standalone body{min-height:100%;background:#fff!important}
+html.portal-login-standalone #loginModal.modal{background:#fff!important;backdrop-filter:none!important}
+html.portal-login-standalone #loginModal .modal-box{background:#fffdfd!important;border:1.5px solid #edcbd4!important;box-shadow:0 22px 70px rgba(117,24,49,.1)!important}
