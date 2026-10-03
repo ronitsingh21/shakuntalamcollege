@@ -997,10 +997,13 @@
       return;
     }
     window._heroCarouselIndex=next;
+    // Keep the indicator synchronized with the requested slide immediately.
+    // Previously it was updated only after the slide animation finished,
+    // which made the hero dots visibly lag behind the image.
+    frame?.querySelectorAll('.hero-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
     const direction=next>from?1:-1;
     const title=slides[next].title||'Shakuntalam College';
     window.animatePublicCarousel(frame,imgEl,slides[next].image,title,direction,()=>{
-      frame?.querySelectorAll('.hero-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
       const cap=document.querySelector('.hero-card-caption');
       if(cap){const b=cap.querySelector('b');if(b)b.textContent=title;}
     });
@@ -1015,8 +1018,10 @@
     const current=slides.findIndex(x=>x.image===imgEl.getAttribute('src')||x.image===imgEl.src);
     if(current>=0)i=current;
     i=(i+(direction>0?1:-1)+slides.length)%slides.length;window._heroCarouselIndex=i;
+    // Update the active dot at the same moment the slide change is requested.
+    frame?.querySelectorAll('.hero-dot').forEach((dot,n)=>dot.classList.toggle('active',n===i));
     const title=slides[i].title||'Shakuntalam College';
-    window.animatePublicCarousel(frame,imgEl,slides[i].image,title,direction,()=>{frame?.querySelectorAll('.hero-dot').forEach((dot,n)=>dot.classList.toggle('active',n===i));const cap=document.querySelector('.hero-card-caption');if(cap){const b=cap.querySelector('b');if(b)b.textContent=title}});
+    window.animatePublicCarousel(frame,imgEl,slides[i].image,title,direction,()=>{const cap=document.querySelector('.hero-card-caption');if(cap){const b=cap.querySelector('b');if(b)b.textContent=title}});
     clearInterval(window._heroCarouselTimer);window._heroCarouselTimer=setInterval(()=>window.nextHeroSlideV7(1),5000);
   };
   let carouselSwipeStart=null;

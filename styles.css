@@ -3539,7 +3539,7 @@ html body #app .final-nav .nav-menu-row nav.final-links>a.nav-contact-button:foc
   .final-nav .mobile-submenu a:hover,.final-nav .mobile-submenu a:focus-visible{background:#fff0f3!important;color:#a4142f!important}
   .final-nav .mobile-menu>a.mobile-menu-link.nav-contact-button{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:4px 8px!important;border:0!important;border-radius:0!important;background:transparent!important;color:#38232b!important;font:400 clamp(20px,4.2vw,29px)/1.22 'Anton','Oswald',sans-serif!important;text-align:left!important;box-shadow:none!important;transform:none!important}
   .final-nav .mobile-menu>a.mobile-menu-link.nav-contact-button:hover,.final-nav .mobile-menu>a.mobile-menu-link.nav-contact-button:focus-visible{background:#edf4ff!important;color:#e31945!important}
-  .admission-ticker{display:none!important}
+  .admission-ticker{display:flex!important}
   .contact-strip .container{width:calc(100% - 28px)!important;min-height:42px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:3px 12px!important;padding:6px 0!important;font-size:clamp(10px,1.3vw,12px)!important}
   .contact-strip .container span{white-space:nowrap!important}
   .contact-strip .contact-organization{display:none!important}
@@ -3646,4 +3646,23 @@ html body #app .final-nav .nav-menu-row nav.final-links>a.nav-contact-button:foc
 /* Remove the facility-card icon while preserving the existing card spacing/style. */
 .home-facility-copy .facility-icon {
   display: none !important;
+}
+
+/* Keep the admission ribbon visible at every viewport width. */
+html body #app .admission-ticker{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:relative!important;
+  z-index:1001!important;
+  width:100%!important;
+  height:39px!important;
+  min-height:39px!important;
+  max-height:39px!important;
+  overflow:hidden!important;
+}
+html body #app .admission-ticker .admission-track{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
 }
