@@ -210,16 +210,7 @@
     if(role==='admin') who=admins().find(x=>(matches(x.username)||matches(x.id))&&String(x.password??'').trim()===password);
     if(!who){showLoginError('We couldn’t find a matching account. Check your username and password, then try again.');return;}
     if(who.status==='Inactive'){showLoginError('This account is inactive. Please contact the college administrator.');return;}
-    clearLoginError();recordPortalLogin(role,who);setSession({...who,role});location.hash=`/portal/${role}`;closeLogin();
-  };
-
-  /* Open the portal login in a dedicated home tab. A short-lived query flag
-     asks that tab to display the existing login modal after the page renders. */
-  window.openPortalLoginInNewTab=function(){
-    const next=new URL(window.location.href);
-    next.searchParams.set('portalLogin','1');
-    next.hash='#/';
-    window.open(next.href,'_blank','noopener,noreferrer');
+    clearLoginError();recordPortalLogin(role,who);setSession({...who,role});activatePortalSession(role,who.id);location.hash=`/portal/${role}`;closeLogin();
   };
 
   /* ---------- public header / navigation ---------- */
@@ -229,16 +220,16 @@
     const ribbonLabel=ribbon.replace(/[✦✥✨]/g,'').trim();
     return `<div class="topbar admission-ticker" aria-label="${ribbonLabel}"><div class="admission-track"><span>${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span><span aria-hidden="true">${ribbonMarkup}</span></div></div>
     <div class="contact-strip"><div class="container"><span class="contact-location"><svg class="contact-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg><span class="contact-location-text">Sasaram, Bihar</span><span class="contact-organization">&nbsp;|&nbsp; Devi Shakuntalam Pratisthan</span></span><span class="contact-phone">☎&nbsp; 9470014145 &nbsp;|&nbsp; 9939205777</span></div></div>
-    <header class="nav final-nav"><div class="container final-nav-wrap"><div class="nav-brand-row"><a class="brand brand-lockup" href="#/"><img class="brand-logo" src="${_finalLogo}" alt="Shakuntalam College logo"><span class="brand-copy"><strong>SHAKUNTALAM COLLEGE</strong><small>DEVI SHAKUNTALAM PRATHISHTHAN</small><em>ESTD 2009</em></span></a><button class="hamb" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobile()">☰</button><div class="nav-actions"><a class="btn btn-gold" href="#/admissions">Apply Now</a><button class="btn btn-gold" type="button" onclick="openPortalLoginInNewTab()">Portal Login</button></div></div>
+    <header class="nav final-nav"><div class="container final-nav-wrap"><div class="nav-brand-row"><a class="brand brand-lockup" href="#/"><img class="brand-logo" src="${_finalLogo}" alt="Shakuntalam College logo"><span class="brand-copy"><strong>SHAKUNTALAM COLLEGE</strong><small>DEVI SHAKUNTALAM PRATHISHTHAN</small><em>ESTD 2009</em></span></a><button class="hamb" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobile()">☰</button><div class="nav-actions"><a class="btn btn-gold" href="#/admissions">Apply Now</a><button class="btn btn-gold" type="button" onclick="openLogin()">Portal Login</button></div></div>
     <div class="nav-menu-row"><nav class="links final-links" aria-label="Main navigation">
       <div class="nav-drop nav-structured"><a href="#/about">About Us <b>⌄</b></a><div class="drop-menu"><a href="#/about">About</a><a href="#/mission">Mission &amp; Values</a><a href="#/leadership/governing-body">Governing Body</a><a href="#/leadership/secretary">Secretary Desk</a><a href="#/leadership/principal">Principle Desk</a></div></div>
       <div class="nav-drop nav-structured"><a href="#/admissions">Admission <b>⌄</b></a><div class="drop-menu"><a href="#/admission-policy">Policy</a><a href="#/course-eligibility">Course &amp; Eligibility</a><a href="#/forms-brochure">Forms &amp; Brochure</a><a href="#/fee-structure">Fee Structure</a><a href="#/admission-links">Link</a></div></div>
       <div class="nav-drop nav-structured academics-drop"><a href="#/academics">Academics <b>⌄</b></a><div class="drop-menu"><a href="#/departments">Courses</a><a href="#/syllabus">Syllabus</a><a href="#/examination">Examination</a><a href="#/academic-calendar">Academic Calendar</a></div></div>
       <div class="nav-drop nav-structured"><a href="#/administration">Administration <b>⌄</b></a><div class="drop-menu"><a href="#/leadership">Leadership</a><a href="#/centre-cell">Centre &amp; Cells</a><a href="#/faculty">List of Faculty</a><a href="#/contact">Contact</a></div></div>
       <div class="nav-drop nav-structured"><a href="#/information">Information <b>⌄</b></a><div class="drop-menu"><a href="#/information/audit-report">Audit Report</a><a href="#/information/annual-report">Annual Report</a><a href="#/information/institutional-certificates">Institutional Certificates</a><a href="#/information/university-affiliation">University Affiliation</a></div></div>
-      <div class="nav-drop nav-structured"><a href="#/disclosure">Disclosure <b>⌄</b></a><div class="drop-menu"><a href="#/disclosure/information">Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
+      <div class="nav-drop nav-structured"><a href="#/disclosure">Disclosure <b>⌄</b></a><div class="drop-menu"><a href="#/add-information">Add. Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
       <div class="nav-drop nav-structured"><a href="#/accreditation">Accreditation <b>⌄</b></a><div class="drop-menu"><a href="#/accreditation/naac">NAAC</a><a href="#/iqac">IQAC</a><a href="#/accreditation/iiqa">IIQA</a></div></div>
-      <div class="nav-drop nav-structured"><a href="#/students-zone">Student Zone <b>⌄</b></a><div class="drop-menu"><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/portal/student" onclick="openPortalLoginInNewTab();return false">Login Portal</a></div></div>
+      <div class="nav-drop nav-structured"><a href="#/students-zone">Student Zone <b>⌄</b></a><div class="drop-menu"><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/nss">NSS</a><a href="#/portal/student" onclick="openLogin();return false">Login Portal</a></div></div>
       <a class="nav-contact-button" href="#/contact">Contact</a>
     </nav></div></div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
@@ -247,10 +238,10 @@
       <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/academics">Academics</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Academics options" aria-expanded="false" aria-controls="mobileSub-academics" onclick="toggleMobileDropdown('academics')">⌄</button></div><div class="mobile-submenu" id="mobileSub-academics" hidden><a href="#/departments">Courses</a><a href="#/syllabus">Syllabus</a><a href="#/examination">Examination</a><a href="#/academic-calendar">Academic Calendar</a></div></div>
       <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/administration">Administration</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Administration options" aria-expanded="false" aria-controls="mobileSub-administration" onclick="toggleMobileDropdown('administration')">⌄</button></div><div class="mobile-submenu" id="mobileSub-administration" hidden><a href="#/leadership">Leadership</a><a href="#/centre-cell">Centre &amp; Cells</a><a href="#/faculty">List of Faculty</a><a href="#/contact">Contact</a></div></div>
       <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/information">Information</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Information options" aria-expanded="false" aria-controls="mobileSub-information" onclick="toggleMobileDropdown('information')">⌄</button></div><div class="mobile-submenu" id="mobileSub-information" hidden><a href="#/information/audit-report">Audit Report</a><a href="#/information/annual-report">Annual Report</a><a href="#/information/institutional-certificates">Institutional Certificates</a><a href="#/information/university-affiliation">University Affiliation</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/disclosure">Disclosure</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Disclosure options" aria-expanded="false" aria-controls="mobileSub-disclosure" onclick="toggleMobileDropdown('disclosure')">⌄</button></div><div class="mobile-submenu" id="mobileSub-disclosure" hidden><a href="#/disclosure/information">Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/disclosure">Disclosure</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Disclosure options" aria-expanded="false" aria-controls="mobileSub-disclosure" onclick="toggleMobileDropdown('disclosure')">⌄</button></div><div class="mobile-submenu" id="mobileSub-disclosure" hidden><a href="#/add-information">Add. Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
       <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/accreditation">Accreditation</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Accreditation options" aria-expanded="false" aria-controls="mobileSub-accreditation" onclick="toggleMobileDropdown('accreditation')">⌄</button></div><div class="mobile-submenu" id="mobileSub-accreditation" hidden><a href="#/accreditation/naac">NAAC</a><a href="#/iqac">IQAC</a><a href="#/accreditation/iiqa">IIQA</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/students-zone">Student Zone</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Student Zone options" aria-expanded="false" aria-controls="mobileSub-student-zone" onclick="toggleMobileDropdown('student-zone')">⌄</button></div><div class="mobile-submenu" id="mobileSub-student-zone" hidden><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/portal/student" onclick="openPortalLoginInNewTab();return false">Login Portal</a></div></div>
-      <a class="mobile-menu-link nav-contact-button" href="#/contact">Contact</a>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/students-zone">Student Zone</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Student Zone options" aria-expanded="false" aria-controls="mobileSub-student-zone" onclick="toggleMobileDropdown('student-zone')">⌄</button></div><div class="mobile-submenu" id="mobileSub-student-zone" hidden><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/nss">NSS</a><a href="#/portal/student" onclick="openLogin();return false">Login Portal</a></div></div>
+      <a class="mobile-menu-link" href="#/contact">Contact</a>
     </nav></header>`;
   }
 
@@ -263,7 +254,7 @@
   /* ---------- portal sidebar / top avatar ---------- */
   function side(role,active){
     const groups=role==='admin'
-      ? [['Overview',['dashboard']],['Academic',['students','teachers','results','attendance','subjects']],['Operations',['admissions','assignments','notices','events','gallery','examinations','iqac']],['Control',['website','payments','admins','profile','settings']]]
+      ? [['Overview',['dashboard']],['Academic',['students','teachers','results','attendance','subjects']],['Operations',['admissions','assignments','notices','events','gallery']],['Documents',['uploaddocs']],['Control',['website','payments','admins','profile','settings']]]
       : role==='teacher'
         ? [['Overview',['dashboard','profile']],['Academic',['attendance','results']],['Teaching',['assignments']],['Services',['notices']]]
         : [['Overview',['dashboard','profile']],['Academic',['attendance','results','assignments']],['Services',['fees','notices']]];
@@ -470,8 +461,9 @@
   const examinationDocumentKinds={calendar:'Examination Calendar',notices:'Examination Notices','semester-exam':'Theory and Practical Exam'};
   function examinationDocumentsPage(kind){
     const title=examinationDocumentKinds[kind],items=(db().examinationDocuments||[]).filter(x=>x.kind===kind).slice().reverse();
+    const managedKey=kind==='calendar'||kind==='semester-exam'?'examination_calendar':'examination_notice';
     const docs=items.map(x=>x.type==='application/pdf'?`<article class="card examination-document-card"><span class="exam-detail-no document-file-mark">${collegeDocumentIcon()}</span><div><h3>${escapeHtml(x.title||x.name)}</h3><p class="muted">${escapeHtml(x.name||'PDF document')} · ${escapeHtml(x.date||'')}</p><a class="btn btn-outline" href="${x.data}" target="_blank" rel="noopener">View / Download PDF ↗</a></div></article>`:`<figure class="card examination-image-card"><img src="${x.data}" alt="${escapeHtml(x.title||x.name)}" loading="lazy"><figcaption><b>${escapeHtml(x.title||x.name)}</b><small>${escapeHtml(x.date||'')}</small><a href="${x.data}" download="${escapeHtml(x.name)}">Open image ↗</a></figcaption></figure>`).join('');
-    return page(title,'Official examination information published by the college.',`<section class="section"><div class="container"><a class="back-link" href="#/examination">← Examination Centre</a><div class="examination-document-grid">${docs||'<div class="card empty">No files have been published here yet.</div>'}</div></div></section>`);
+    return page(title,'Official examination information published by the college.',`<section class="section"><div class="container"><a class="back-link" href="#/examination">← Examination Centre</a><div class="examination-document-grid">${docs||'<div class="card empty">No files have been published here yet.</div>'}</div>${typeof managedPublicDocumentSlot==='function'?managedPublicDocumentSlot(managedKey):''}</div></section>`);
   }
   function adminExaminationDocuments(){
     const items=(db().examinationDocuments||[]).slice().reverse();
@@ -497,7 +489,8 @@
     if(kind==='pyq-paper'||kind==='code-of-conduct'){
       const isPyq=kind==='pyq-paper',title=isPyq?'PYQ Paper':'Code of Conduct',description=isPyq?'Previous Year Question Papers and examination resources.':'Examination rules, guidelines and code of conduct.';
       const note=isPyq?'Approved question paper PDFs can be added here, organized by course, semester and subject.':'Approved examination rules and guidance can be published here when supplied by the college.';
-      return page(title,description,`<section class="section"><div class="container academic-resource-detail"><a class="back-link" href="#/examination">← Examination</a><article class="card academic-resource-document"><span class="academic-resource-icon" aria-hidden="true">${collegeDocumentIcon()}</span><div><span class="kicker">Document resources</span><h2>${escapeHtml(title)}</h2><p class="muted">${escapeHtml(note)}</p><div class="resource-card-status"><b>Resources</b><span>No documents have been published yet.</span></div></div></article></div></section>`);
+      const key=isPyq?'pyq_papers':'code_of_conduct';
+      return page(title,description,`<section class="section"><div class="container academic-resource-detail"><a class="back-link" href="#/examination">← Examination</a><article class="card academic-resource-document"><span class="academic-resource-icon" aria-hidden="true">${collegeDocumentIcon()}</span><div><span class="kicker">Document resources</span><h2>${escapeHtml(title)}</h2><p class="muted">${escapeHtml(note)}</p><div class="resource-card-status"><b>Resources</b><span>No documents have been published yet.</span></div>${typeof managedPublicDocumentSlot==='function'?managedPublicDocumentSlot(key):''}</div></article></div></section>`);
     }
     const data={
       calendar:['Examination Calendar','Semester-wise academic and examination timeline.',['Semester examination schedule','Publish theory and practical dates for each course and semester.'],['Internal assessment window','Display internal test, assignment and practical submission periods.'],['Important dates','Keep application, admit-card and result publication dates visible.']],
@@ -654,6 +647,7 @@
     if(s==='admissions')return adminAdmissions();
     if(s==='events')return adminEvents();
     if(s==='gallery')return adminGalleryFinal();
+    if(s==='uploaddocs')return uploadDocsAdminPage();
     if(s==='examinations')return adminExaminationDocuments();
     if(s==='iqac')return adminIqacDocuments();
     if(s==='website')return websiteBuilder();
@@ -705,12 +699,7 @@
     const samePath=previousPath===path;
     if(path.startsWith('/portal/')){
       const p=path.split('/').filter(Boolean),sess=currentUser(),wanted=p[1]||'student';
-      const sessionRole=String(sess?.role||'').trim().toLowerCase();
-      // Older sessions may store role labels with different capitalization. For
-      // teacher routes, confirm the signed-in identity against a teacher record
-      // as well so nested semester pages never fall back to the legacy renderer.
-      const teacherIdentity= wanted==='teacher'&&!!sess&&teachers().some(t=>String(t.id)===String(sess.id));
-      if(sess&&(sessionRole===wanted||teacherIdentity)){
+      if(portalSessionAllows(wanted,sess)){
         window._deepPortalParts=p.slice(2);let section=p[2]||'dashboard';
         // app.js renders once before this upgrade script is loaded. On a direct
         // refresh into an admin route that first render has the legacy sidebar;
@@ -856,10 +845,25 @@
   function finalRoute(){
     const path=location.hash.replace(/^#/,'')||'/';
     const previousPath=window._lastFinalRoutePath; const previousScroll=window.scrollY||0; const samePath=previousPath===path;
+    const enteringPortal=isPortalPath(path);
+    if(shouldEndPortalSession(previousPath,path))endPortalSession();
     /* Keep deep portal navigation on the upgraded router. The base app router
        only understands the top-level portal section and replaces the grouped
        sidebar with its legacy flat version on semester/detail hashes. */
-    if(path.startsWith('/portal/')){window.__shakuntalamPortalRoute();return;}
+    if(enteringPortal){
+      const wanted=path.split('/').filter(Boolean)[1]||'student';
+      if(!portalSessionAllows(wanted)){
+        endPortalSession();
+        const publicUrl=`${location.pathname}${location.search}#/`;
+        history.replaceState(history.state,'',publicUrl);
+        window._lastFinalRoutePath='/';
+        _baseShakuntalamRoute();
+        startHeroCarouselV5();startHomeImageCarousels();
+        requestAnimationFrame(()=>{window.scrollTo(0,0);openLogin()});
+        return;
+      }
+      window.__shakuntalamPortalRoute();return;
+    }
     if(path.startsWith('/examination/') && path!=='/examination') {
       const kind=path.split('/').filter(Boolean)[1]||'calendar';
       app.innerHTML=examinationSubPage(kind)+loginModal();
@@ -883,15 +887,8 @@
   window.removeEventListener('load', originalRoute);
   window.addEventListener('hashchange', finalRoute);
   window.addEventListener('load', finalRoute);
-  function openPortalLoginFromLaunchFlag(){
-    if(!new URLSearchParams(location.search).has('portalLogin'))return;
-    document.documentElement.classList.add('portal-login-standalone');
-    try{history.replaceState(null,'',location.pathname+location.hash)}catch(_){}
-    openLogin();
-  }
-  if(document.readyState==='complete')requestAnimationFrame(openPortalLoginFromLaunchFlag);
-  else window.addEventListener('load',openPortalLoginFromLaunchFlag,{once:true});
-
+  window.addEventListener('popstate', finalRoute);
+  window.addEventListener('pageshow',function(event){if(event.persisted)finalRoute()});
   /* Ensure a portal link clicked immediately after login renders the new
      screen even if the browser batches the hashchange event. */
   document.addEventListener('click', function(ev){
