@@ -5,8 +5,9 @@
    ================================================================ */
 (function(){
   const BUNDLED_HERO_SLIDES = [
-    {image:'assets/hero-campus-main.png',title:'Shakuntalam College · Main Campus'},
-    {image:'assets/hero-campus-event.png',title:'Campus Inauguration'}
+    {image:'assets/v3-img-05-main-campus.png',title:'Shakuntalam College Main Campus'},
+    {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'},
+    {image:'assets/v3-img-06-inauguration.png',title:'Ribbon Cutting · Inauguration Ceremony'}
   ];
   const TAXONOMY = [
     {id:'teacher-education', name:'Department of Teachers Education', courses:[
@@ -71,6 +72,9 @@
 
   function ensureFinal20260926(){
     const d=db()||{};
+    const slideCopy=x=>`${x?.image||''} ${x?.title||''} ${x?.alt||''} ${x?.caption||''}`.toLowerCase();
+    const removeLegacyTrainingSlide=x=>/hero-campus-iti|course-campus-iti|shakuntalam\s*iti|industrial training institute/.test(slideCopy(x));
+    const removeHoliRecord=x=>/\bholi\b/i.test((typeof x==='string'?x:`${x?.image||''} ${x?.title||''} ${x?.alt||''} ${x?.caption||''} ${x?.description||''} ${x?.name||''}`).replace(/[-_]+/g,' '));
     d.applications=Array.isArray(d.applications)?d.applications:[];
     /* Start with a clean notice board; administrators can publish notices as needed. */
     if(!d.emptyNoticesV1){d.notices=[];d.emptyNoticesV1=true;}
@@ -82,7 +86,7 @@
        a one-time data migration, so accounts added by the admin afterward
        remain intact on later visits. */
     if(!d.emptyDemoRosterV1){d.students=[];d.teachers=[];d.emptyDemoRosterV1=true;try{const oldSession=JSON.parse(sessionStorage.getItem('shakuntalam_session')||'null');if(oldSession&&['student','teacher'].includes(oldSession.role))sessionStorage.removeItem('shakuntalam_session');}catch(_){}}
-    d.gallery=Array.isArray(d.gallery)?d.gallery:[];
+    d.gallery=(Array.isArray(d.gallery)?d.gallery:[]).filter(item=>!removeHoliRecord(item));
     d.iqacDocuments=Array.isArray(d.iqacDocuments)?d.iqacDocuments:[];
     d.profileAudit=Array.isArray(d.profileAudit)?d.profileAudit:[];
     d.subjectCatalog=d.subjectCatalog||{};
@@ -93,29 +97,61 @@
       d.site.ribbonText=admissionRibbon;
       d.site.ribbonTextRevision='admission-open-bba-bca-sparkle-v1';
     }else d.site.ribbonText=typeof d.site.ribbonText==='string' ? d.site.ribbonText : admissionRibbon;
-    d.site.heroSlides=Array.isArray(d.site.heroSlides)?d.site.heroSlides.filter(x=>x&&x.image&&!['assets/hero-campus-iti.png','assets/course-campus-iti.jpeg'].includes(x.image)):[];
+    d.site.heroSlides=Array.isArray(d.site.heroSlides)?d.site.heroSlides.filter(x=>x&&x.image&&!removeLegacyTrainingSlide(x)&&!removeHoliRecord(x)):[];
     const legacyDefaultImages=[img.hero,img.campus,img.class];
     const legacyDefaultTitles=['Shakuntalam College','Campus Life','Learning & Practice'];
     const stillUsingLegacyDefaults=d.site.heroSlides.length===3&&d.site.heroSlides.every((slide,index)=>slide.image===legacyDefaultImages[index]&&(!slide.title||slide.title===legacyDefaultTitles[index]));
-    const oldBundledDefaults=d.site.heroSlides.length===3&&d.site.heroSlides[0]?.image==='assets/hero-campus-main.png'&&d.site.heroSlides[1]?.image==='assets/hero-campus-iti.png'&&d.site.heroSlides[2]?.image==='assets/hero-campus-event.png';
-    const noSavedHeroYet=d.site.heroSlides.length===0&&(!d.site.heroImage||d.site.heroImage===img.hero||d.site.heroImage==='assets/course-campus-iti.jpeg'||d.site.heroImage==='assets/hero-campus-iti.png');
+    const oldBundledDefaults=d.site.heroSlides.length===2&&d.site.heroSlides[0]?.image==='assets/hero-campus-main.png'&&d.site.heroSlides[1]?.image==='assets/hero-campus-event.png';
+    const noSavedHeroYet=d.site.heroSlides.length===0&&(!d.site.heroImage||d.site.heroImage===img.hero||removeLegacyTrainingSlide({image:d.site.heroImage}));
     if(stillUsingLegacyDefaults||oldBundledDefaults||noSavedHeroYet)d.site.heroSlides=BUNDLED_HERO_SLIDES.map(slide=>({...slide}));
     else if(!d.site.heroSlides.length)d.site.heroSlides=[{image:d.site.heroImage,title:'Shakuntalam College'}];
     d.site.heroSlides.forEach(x=>{if(/^Academic Session 2026[–-]27$/.test(String(x.title||'')))x.title='Shakuntalam College';});
     d.site.heroImage=d.site.heroSlides[0].image;
     d.site.homeImages=d.site.homeImages||{};
+    /* Requested homepage carousel set: change only these three carousels.
+       All other site content/data remains untouched. */
+    if(d.site.carouselImageSetRevision!=='v3-requested-carousels-v1'){
+      d.site.heroSlides=[
+        {image:'assets/v3-img-05-main-campus.png',title:'Shakuntalam College Main Campus'},
+        {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'},
+        {image:'assets/v3-img-06-inauguration.png',title:'Ribbon Cutting · Inauguration Ceremony'}
+      ];
+      d.site.heroImage=d.site.heroSlides[0].image;
+      d.site.homeImages.campusSlides=[
+        {image:'assets/v3-img-02-examination.png',title:'Students Taking an Examination'},
+        {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'},
+        {image:'assets/v3-img-03-national-education-seminar.png',title:'National Education Seminar 2026'}
+      ];
+      d.site.homeImages.campus=d.site.homeImages.campusSlides[0].image;
+      d.site.homeImages.classroomSlides=[
+        {image:'assets/v3-img-04-saraswati-puja.png',title:'Saraswati Puja · Cultural Celebration'},
+        {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'}
+      ];
+      d.site.homeImages.classroom=d.site.homeImages.classroomSlides[0].image;
+      d.site.carouselImageSetRevision='v3-requested-carousels-v1';
+    }
+    for(const course of ['Electrician','Fitter']){
+      const slides=d.site.coursePhotoSlides?.[course];
+      if(Array.isArray(slides)){
+        d.site.coursePhotoSlides[course]=slides.filter(x=>x?.image&&!removeLegacyTrainingSlide(x));
+        if(!d.site.coursePhotoSlides[course].length)delete d.site.coursePhotoSlides[course];
+      }
+      if(removeLegacyTrainingSlide({image:d.site.courseImages?.[course]}))delete d.site.courseImages[course];
+    }
     const campusImages=d.site.homeImages.campusSlides;
     const oldDefaultCampusSlides=Array.isArray(campusImages)&&campusImages.length===1&&campusImages[0]?.image===img.campus&&(!campusImages[0].title||campusImages[0].title==='A place to begin and belong');
-    const oldBundledCampusSlides=Array.isArray(campusImages)&&campusImages.length===2&&campusImages[0]?.image==='assets/purpose-campus-main.png'&&campusImages[1]?.image==='assets/hero-campus-iti.png';
+    const oldBundledCampusSlides=Array.isArray(campusImages)&&campusImages.length===2&&campusImages[0]?.image==='assets/purpose-campus-main.png'&&removeLegacyTrainingSlide(campusImages[1]);
     const noCampusSlides=(!Array.isArray(campusImages)||campusImages.length===0)&&(!d.site.homeImages.campus||d.site.homeImages.campus===img.campus);
     if(oldDefaultCampusSlides||oldBundledCampusSlides||noCampusSlides){
       d.site.homeImages.campusSlides=[
-        {image:'assets/purpose-campus-main.png',title:'Shakuntalam College Campus'}
+        {image:'assets/v3-img-02-examination.png',title:'Students Taking an Examination'},
+        {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'},
+        {image:'assets/v3-img-03-national-education-seminar.png',title:'National Education Seminar 2026'}
       ];
     }else if(!Array.isArray(campusImages)||campusImages.length===0){
       d.site.homeImages.campusSlides=[{image:d.site.homeImages.campus,title:'Education with purpose'}];
     }
-    d.site.homeImages.campusSlides=d.site.homeImages.campusSlides.filter(x=>x&&x.image&&!['assets/hero-campus-iti.png','assets/course-campus-iti.jpeg'].includes(x.image));
+    d.site.homeImages.campusSlides=d.site.homeImages.campusSlides.filter(x=>x&&x.image&&!removeLegacyTrainingSlide(x)&&!removeHoliRecord(x));
     if(!d.site.homeImages.campusSlides.length)d.site.homeImages.campusSlides=[{image:'assets/purpose-campus-main.png',title:'Shakuntalam College Campus'}];
     d.site.homeImages.campus=d.site.homeImages.campusSlides[0].image;
     const classroomImages=d.site.homeImages.classroomSlides;
@@ -123,15 +159,16 @@
     const noClassroomSlides=(!Array.isArray(classroomImages)||classroomImages.length===0)&&(!d.site.homeImages.classroom||d.site.homeImages.classroom===img.class);
     if(oldDefaultClassroomSlides||noClassroomSlides){
       d.site.homeImages.classroomSlides=[
-        {image:'assets/learning-clean-campus.png',title:'Campus Cleanliness Drive'},
-        {image:'assets/learning-seminar.png',title:'Academic Seminar'},
+        {image:'assets/v3-img-04-saraswati-puja.png',title:'Saraswati Puja · Cultural Celebration'},
+        {image:'assets/v3-img-01-cleanliness-rally.png',title:'Cleanliness Awareness Rally'}
       ];
     }else if(!Array.isArray(classroomImages)||classroomImages.length===0){
       d.site.homeImages.classroomSlides=[{image:d.site.homeImages.classroom,title:'Learning, practice and progress'}];
     }
-    d.site.homeImages.classroomSlides=d.site.homeImages.classroomSlides.filter(x=>x&&x.image&&!['assets/learning-holi-celebration.png','assets/learning-faculty.png'].includes(x.image));
+    d.site.homeImages.classroomSlides=d.site.homeImages.classroomSlides.filter(x=>x&&x.image&&!removeHoliRecord(x)&&!/learning-faculty/i.test(String(x.image)));
     if(!d.site.homeImages.classroomSlides.length)d.site.homeImages.classroomSlides=[{image:'assets/learning-clean-campus.png',title:'Campus Cleanliness Drive'},{image:'assets/learning-seminar.png',title:'Academic Seminar'}];
     d.site.homeImages.classroom=d.site.homeImages.classroomSlides[0].image;
+    d.events=(Array.isArray(d.events)?d.events:[]).filter(event=>!removeHoliRecord(event));
     TAXONOMY.flatMap(dep=>dep.courses).forEach(c=>{
       d.subjectCatalog[c.name]=d.subjectCatalog[c.name]||{};
       for(let sem=1;sem<=c.semesters;sem++){
@@ -233,14 +270,14 @@
       <a class="nav-contact-button" href="#/contact">Contact</a>
     </nav></div></div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/about">About Us</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show About Us options" aria-expanded="false" aria-controls="mobileSub-about" onclick="toggleMobileDropdown('about')">⌄</button></div><div class="mobile-submenu" id="mobileSub-about" hidden><a href="#/about">About</a><a href="#/mission">Mission &amp; Values</a><a href="#/leadership/governing-body">Governing Body</a><a href="#/leadership/secretary">Secretary Desk</a><a href="#/leadership/principal">Principle Desk</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/admissions">Admission</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Admission options" aria-expanded="false" aria-controls="mobileSub-admission" onclick="toggleMobileDropdown('admission')">⌄</button></div><div class="mobile-submenu" id="mobileSub-admission" hidden><a href="#/admission-policy">Policy</a><a href="#/course-eligibility">Course &amp; Eligibility</a><a href="#/forms-brochure">Forms &amp; Brochure</a><a href="#/fee-structure">Fee Structure</a><a href="#/admission-links">Link</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/academics">Academics</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Academics options" aria-expanded="false" aria-controls="mobileSub-academics" onclick="toggleMobileDropdown('academics')">⌄</button></div><div class="mobile-submenu" id="mobileSub-academics" hidden><a href="#/departments">Courses</a><a href="#/syllabus">Syllabus</a><a href="#/examination">Examination</a><a href="#/academic-calendar">Academic Calendar</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/administration">Administration</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Administration options" aria-expanded="false" aria-controls="mobileSub-administration" onclick="toggleMobileDropdown('administration')">⌄</button></div><div class="mobile-submenu" id="mobileSub-administration" hidden><a href="#/leadership">Leadership</a><a href="#/centre-cell">Centre &amp; Cells</a><a href="#/faculty">List of Faculty</a><a href="#/contact">Contact</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/information">Information</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Information options" aria-expanded="false" aria-controls="mobileSub-information" onclick="toggleMobileDropdown('information')">⌄</button></div><div class="mobile-submenu" id="mobileSub-information" hidden><a href="#/information/audit-report">Audit Report</a><a href="#/information/annual-report">Annual Report</a><a href="#/information/institutional-certificates">Institutional Certificates</a><a href="#/information/university-affiliation">University Affiliation</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/disclosure">Disclosure</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Disclosure options" aria-expanded="false" aria-controls="mobileSub-disclosure" onclick="toggleMobileDropdown('disclosure')">⌄</button></div><div class="mobile-submenu" id="mobileSub-disclosure" hidden><a href="#/add-information">Add. Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/accreditation">Accreditation</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Accreditation options" aria-expanded="false" aria-controls="mobileSub-accreditation" onclick="toggleMobileDropdown('accreditation')">⌄</button></div><div class="mobile-submenu" id="mobileSub-accreditation" hidden><a href="#/accreditation/naac">NAAC</a><a href="#/iqac">IQAC</a><a href="#/accreditation/iiqa">IIQA</a></div></div>
-      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/students-zone">Student Zone</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Student Zone options" aria-expanded="false" aria-controls="mobileSub-student-zone" onclick="toggleMobileDropdown('student-zone')">⌄</button></div><div class="mobile-submenu" id="mobileSub-student-zone" hidden><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/nss">NSS</a><a href="#/portal/student" onclick="openLogin();return false">Login Portal</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/about">About Us</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show About Us options" aria-expanded="false" aria-controls="mobileSub-about" onclick="toggleMobileDropdown('about')"></button></div><div class="mobile-submenu" id="mobileSub-about" hidden><a href="#/about">About</a><a href="#/mission">Mission &amp; Values</a><a href="#/leadership/governing-body">Governing Body</a><a href="#/leadership/secretary">Secretary Desk</a><a href="#/leadership/principal">Principle Desk</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/admissions">Admission</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Admission options" aria-expanded="false" aria-controls="mobileSub-admission" onclick="toggleMobileDropdown('admission')"></button></div><div class="mobile-submenu" id="mobileSub-admission" hidden><a href="#/admission-policy">Policy</a><a href="#/course-eligibility">Course &amp; Eligibility</a><a href="#/forms-brochure">Forms &amp; Brochure</a><a href="#/fee-structure">Fee Structure</a><a href="#/admission-links">Link</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/academics">Academics</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Academics options" aria-expanded="false" aria-controls="mobileSub-academics" onclick="toggleMobileDropdown('academics')"></button></div><div class="mobile-submenu" id="mobileSub-academics" hidden><a href="#/departments">Courses</a><a href="#/syllabus">Syllabus</a><a href="#/examination">Examination</a><a href="#/academic-calendar">Academic Calendar</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/administration">Administration</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Administration options" aria-expanded="false" aria-controls="mobileSub-administration" onclick="toggleMobileDropdown('administration')"></button></div><div class="mobile-submenu" id="mobileSub-administration" hidden><a href="#/leadership">Leadership</a><a href="#/centre-cell">Centre &amp; Cells</a><a href="#/faculty">List of Faculty</a><a href="#/contact">Contact</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/information">Information</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Information options" aria-expanded="false" aria-controls="mobileSub-information" onclick="toggleMobileDropdown('information')"></button></div><div class="mobile-submenu" id="mobileSub-information" hidden><a href="#/information/audit-report">Audit Report</a><a href="#/information/annual-report">Annual Report</a><a href="#/information/institutional-certificates">Institutional Certificates</a><a href="#/information/university-affiliation">University Affiliation</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/disclosure">Disclosure</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Disclosure options" aria-expanded="false" aria-controls="mobileSub-disclosure" onclick="toggleMobileDropdown('disclosure')"></button></div><div class="mobile-submenu" id="mobileSub-disclosure" hidden><a href="#/add-information">Add. Information</a><a href="#/disclosure/fixed-deposits">Fixed Deposits</a><a href="#/disclosure/affidavits">Affidavits</a><a href="#/admission-policy">Admission Policy</a><a href="#/disclosure/building-land-documents">Building/Land Documents</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/accreditation">Accreditation</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Accreditation options" aria-expanded="false" aria-controls="mobileSub-accreditation" onclick="toggleMobileDropdown('accreditation')"></button></div><div class="mobile-submenu" id="mobileSub-accreditation" hidden><a href="#/accreditation/naac">NAAC</a><a href="#/iqac">IQAC</a><a href="#/accreditation/iiqa">IIQA</a></div></div>
+      <div class="mobile-nav-group"><div class="mobile-nav-row"><a class="mobile-menu-link" href="#/students-zone">Student Zone</a><button type="button" class="mobile-dropdown-toggle" aria-label="Show Student Zone options" aria-expanded="false" aria-controls="mobileSub-student-zone" onclick="toggleMobileDropdown('student-zone')"></button></div><div class="mobile-submenu" id="mobileSub-student-zone" hidden><a href="#/events">Events</a><a href="#/gallery">Gallery</a><a href="#/examination">Examination</a><a href="#/student-welfare">Student Welfare</a><a href="#/nss">NSS</a><a href="#/portal/student" onclick="openLogin();return false">Login Portal</a></div></div>
       <a class="mobile-menu-link" href="#/contact">Contact</a>
     </nav></header>`;
   }
@@ -818,6 +855,7 @@
   window.examination = examinationFinal;
   window.home = window.home || window.home;
   const _baseShakuntalamRoute = window.route;
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
   let _homeTextRevealObserver=null;
   function initHomeTextReveal(){
     _homeTextRevealObserver?.disconnect();
@@ -844,7 +882,7 @@
   }
   function finalRoute(){
     const path=location.hash.replace(/^#/,'')||'/';
-    const previousPath=window._lastFinalRoutePath; const previousScroll=window.scrollY||0; const samePath=previousPath===path;
+    const previousPath=window._lastFinalRoutePath;
     const enteringPortal=isPortalPath(path);
     if(shouldEndPortalSession(previousPath,path))endPortalSession();
     /* Keep deep portal navigation on the upgraded router. The base app router
@@ -867,7 +905,7 @@
     if(path.startsWith('/examination/') && path!=='/examination') {
       const kind=path.split('/').filter(Boolean)[1]||'calendar';
       app.innerHTML=examinationSubPage(kind)+loginModal();
-      startClock(); window._lastFinalRoutePath=path; requestAnimationFrame(()=>window.scrollTo(0,samePath?previousScroll:0)); return;
+      startClock(); window._lastFinalRoutePath=path; requestAnimationFrame(()=>window.scrollTo(0,0)); return;
     }
     _baseShakuntalamRoute();
     if(path==='/'){
@@ -875,7 +913,7 @@
       sections.find(sec=>/Notice board/i.test(sec.querySelector('h2')?.textContent||''))?.remove();
       initHomeTextReveal();
     }
-    window._lastFinalRoutePath=path; requestAnimationFrame(()=>window.scrollTo(0,samePath?previousScroll:0));
+    window._lastFinalRoutePath=path; requestAnimationFrame(()=>window.scrollTo(0,0));
   }
   window.route = finalRoute;
   // app.js registered its base route before this upgrade loaded. Remove that
@@ -945,6 +983,30 @@
       if(incoming&&incoming.parentNode)incoming.remove();
     }finally{frame.dataset.carouselAnimating='false'}
   };
+  window.showHeroSlideV7=function(index){
+    const slides=(db()?.site?.heroSlides||[]).filter(x=>x&&x.image),imgEl=document.getElementById('heroCarouselImage')||document.querySelector('.hero-card img');
+    if(!imgEl||!slides.length)return;
+    const frame=imgEl.closest('.hero-carousel-stage')||imgEl.closest('.hero-card');
+    if(frame?.dataset.carouselAnimating==='true')return;
+    const current=slides.findIndex(x=>x.image===imgEl.getAttribute('src')||x.image===imgEl.src);
+    const from=current>=0?current:(Number.isFinite(window._heroCarouselIndex)?window._heroCarouselIndex:0);
+    const next=((Number(index)%slides.length)+slides.length)%slides.length;
+    if(next===from){
+      window._heroCarouselIndex=next;
+      frame?.querySelectorAll('.hero-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
+      return;
+    }
+    window._heroCarouselIndex=next;
+    const direction=next>from?1:-1;
+    const title=slides[next].title||'Shakuntalam College';
+    window.animatePublicCarousel(frame,imgEl,slides[next].image,title,direction,()=>{
+      frame?.querySelectorAll('.hero-dot').forEach((dot,i)=>dot.classList.toggle('active',i===next));
+      const cap=document.querySelector('.hero-card-caption');
+      if(cap){const b=cap.querySelector('b');if(b)b.textContent=title;}
+    });
+    clearInterval(window._heroCarouselTimer);
+    window._heroCarouselTimer=setInterval(()=>window.nextHeroSlideV7(1),5000);
+  };
   window.nextHeroSlideV7=function(direction){
     const slides=(db()?.site?.heroSlides||[]).filter(x=>x&&x.image),imgEl=document.getElementById('heroCarouselImage')||document.querySelector('.hero-card img');
     if(!imgEl||!slides.length)return;
@@ -954,7 +1016,7 @@
     if(current>=0)i=current;
     i=(i+(direction>0?1:-1)+slides.length)%slides.length;window._heroCarouselIndex=i;
     const title=slides[i].title||'Shakuntalam College';
-    window.animatePublicCarousel(frame,imgEl,slides[i].image,title,direction,()=>{const cap=document.querySelector('.hero-card-caption');if(cap){const b=cap.querySelector('b');if(b)b.textContent=title}});
+    window.animatePublicCarousel(frame,imgEl,slides[i].image,title,direction,()=>{frame?.querySelectorAll('.hero-dot').forEach((dot,n)=>dot.classList.toggle('active',n===i));const cap=document.querySelector('.hero-card-caption');if(cap){const b=cap.querySelector('b');if(b)b.textContent=title}});
     clearInterval(window._heroCarouselTimer);window._heroCarouselTimer=setInterval(()=>window.nextHeroSlideV7(1),5000);
   };
   let carouselSwipeStart=null;
