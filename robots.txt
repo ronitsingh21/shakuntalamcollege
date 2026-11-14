@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Before deployment, add: Sitemap: https://<your-production-host>/sitemap.xml
+# Replace the placeholder with the actual HTTPS hostname.

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Intentionally no URLs until the actual production HTTPS domain is configured. -->
+  <!-- Hash routes are client-side fragments and are not independent crawlable pages. -->
+</urlset>
